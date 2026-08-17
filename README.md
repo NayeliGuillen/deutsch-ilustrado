@@ -1,0 +1,207 @@
+# Deutsch Ilustrado 🇩🇪
+
+Guía interactiva para aprender alemán desde cero (nivel A1–A2), con **infografías
+tipo mapa mental**, **pronunciación en audio**, vocabulario, frases reales,
+flashcards y quiz.
+
+Hecha con **HTML, CSS y JavaScript puro**: sin frameworks, sin dependencias,
+sin compilación. Funciona abriendo `index.html`, incluso sin conexión (el audio
+tiene sus matices: ver más abajo).
+
+---
+
+## Cómo usarla
+
+**Opción 1 — doble clic.** Abre `index.html` en Chrome, Edge o Safari. Ya está.
+
+**Opción 2 — servidor local** (recomendado si vas a modificar el código, evita el
+caché agresivo del navegador):
+
+```bash
+# Con Python (ya instalado en el equipo)
+python -m http.server 8080
+# luego abre http://localhost:8080
+```
+
+### Audio: cómo conseguir pronunciación alemana de verdad
+
+La guía no usa archivos MP3: sintetiza la voz con la *Web Speech API* del
+navegador. Eso implica que **la calidad depende de las voces que tenga tu
+equipo**, y conviene saberlo:
+
+| Situación | Qué se oye |
+|---|---|
+| Voz alemana instalada en Windows | Alemán correcto, **también sin conexión**. Lo ideal. |
+| Chrome o Edge + internet, sin voz instalada | Alemán correcto con la voz de red *Google Deutsch*. Necesita conexión. |
+| **Brave**, sin voz instalada | Nada: Brave **bloquea las voces de red de Google** por privacidad y solo usa las de Windows. |
+| Sin voz alemana y sin conexión | El navegador leería el alemán con **voz inglesa**: pronunciación falsa. |
+
+**Salvaguarda:** en los dos últimos casos la guía **no reproduce el audio**, para
+no enseñar una pronunciación equivocada. Muestra un recuadro rojo en *Alfabeto y
+pronunciación* y en *Practicar* explicando cómo arreglarlo, con un botón por si
+aun así quieres oírlo (queda claramente marcado como "sonará en inglés").
+
+Windows **no** trae la voz alemana de serie. Para instalarla en **Windows 10**:
+*Configuración → Hora e idioma → Voz → Administrar voces → Agregar voces →
+Alemán (Alemania)*. En **Windows 11**: *Configuración → Hora e idioma → Idioma y
+región → Agregar idioma → Deutsch (Deutschland)*, marcando **Voz**. Después cierra
+el navegador **por completo** y vuelve a abrirlo: las voces solo se detectan al
+arrancar.
+
+Mientras no la tengas, guíate por la **transcripción fonética en español** que
+acompaña a cada palabra y frase: está pensada justo para eso.
+
+---
+
+## Qué incluye
+
+| Sección | Contenido |
+|---|---|
+| **Alfabeto y pronunciación** | 26 letras + Ä Ö Ü ß, con audio y ejemplo. Vocales largas/cortas, diptongos, `sch`/`ch`/`sp`/`st`, la `r` alemana, acentuación y trabalenguas. |
+| **Los tres géneros** | der/die/das, artículos definidos e indefinidos, cómo deducir el género por su terminación, plurales. |
+| **Los 4 casos** | Nominativ, Akkusativ, Dativ, Genitiv. Tabla maestra, preposiciones que rigen cada caso y pronombres. |
+| **Verbos regulares** | Terminaciones, método de conjugación, usos, irregularidades ortográficas, `sein` y `haben`. |
+| **Verbos con prefijo** | Separables vs. inseparables, participios, orden de la frase. |
+| **Números, hora y fecha** | Cardinales, la "regla del revés", ordinales, fechas, la hora (incluida la trampa de *halb vier*), precios. |
+| **Adjetivos** | Cuándo declinan y cuándo no, las tres declinaciones, orden de varios adjetivos, comparativo y superlativo. |
+| **Vocabulario esencial** | 172 palabras en 11 temas, cada sustantivo con su artículo, filtro por categoría y favoritas. |
+| **Frases para conversar** | 88 expresiones reales en 10 situaciones (saludos, restaurante, compras, viaje, trámites, emergencias…), con transcripción fonética. |
+| **Practicar** | Flashcards (mazo completo, por tema o solo tus favoritas ★) y quiz de 10 preguntas barajadas de un banco de 30. |
+
+Otras funciones: buscador global (atajo `/`), tema claro/oscuro, control de
+velocidad de la voz, progreso guardado en el navegador, y las láminas se pueden
+imprimir con `Ctrl+P` para colgarlas en la pared.
+
+---
+
+## Estructura del proyecto
+
+```
+Curso german/
+├── index.html                  Único HTML: cascarón de la aplicación
+├── README.md
+└── assets/
+    ├── css/
+    │   ├── tokens.css          Variables de diseño (colores, tipos, temas)
+    │   ├── base.css            Reset, tipografía y utilidades
+    │   ├── layout.css          Barra superior, menú lateral, vista
+    │   ├── components.css      Botones, tarjetas, tablas, flashcards, quiz
+    │   └── infografia.css      El "mapa mental": núcleo, tarjetas de colores
+    └── js/
+        ├── core/
+        │   ├── app.js          Espacio de nombres DE + registro de lecciones
+        │   ├── store.js        Persistencia (localStorage)
+        │   ├── voz.js          Síntesis de voz alemana
+        │   ├── dom.js          Ayudantes de HTML (siempre con escape)
+        │   └── router.js       Enrutado por hash (#/leccion)
+        ├── data/               CONTENIDO: una lección por archivo
+        │   ├── pronunciacion.js  generos.js  casos.js
+        │   ├── verbos-regulares.js  verbos-separables.js
+        │   ├── numeros.js  adjetivos.js
+        │   ├── vocabulario.js  frases.js  quiz.js
+        ├── views/              CÓMO SE DIBUJA cada tipo de lección
+        │   ├── panel-voz.js    Recuadro con el estado real del audio
+        │   ├── infografia.js   Motor de láminas (lo usan casi todas)
+        │   ├── alfabeto.js  vocabulario.js  frases.js
+        │   ├── practica.js  inicio.js  buscador.js
+        └── main.js             Arranque: menú, tema, buscador, audio
+```
+
+### La idea de la arquitectura
+
+**Datos separados de presentación.** Un archivo de `data/` no contiene ni una
+línea de HTML: solo describe *qué* se enseña. Un archivo de `views/` no contiene
+contenido: solo sabe *cómo* dibujar una estructura de datos. Por eso ampliar el
+curso es escribir datos, no maquetar.
+
+Los scripts son clásicos (sin `type="module"`) a propósito: los módulos ES no
+funcionan al abrir un archivo con `file://`, y aquí importa que la guía se pueda
+abrir con doble clic. Todo cuelga de un único objeto global, `DE`.
+
+---
+
+## Añadir una lección nueva
+
+1. Crea `assets/js/data/mi-tema.js`:
+
+```js
+DE.registrarLeccion({
+  id: 'mi-tema',                       // ruta: #/mi-tema
+  titulo: 'Mi tema',
+  icono: 'libro',                      // nombre del catálogo de iconos
+  grupo: 'Gramática esencial',         // sección del menú
+  color: 'azul',
+  resumen: 'Una línea que explica la lección.',
+  vista: 'infografia',
+  datos: {
+    titulo: 'MI TEMA',
+    subtitulo: 'mein Thema',
+    cinta: 'La idea en cinco palabras',
+    resumen: 'Un párrafo corto.',
+    tarjetas: [
+      {
+        n: 1, color: 'verde', icono: 'idea', titulo: '¿Qué es?',
+        bloques: [
+          { tipo: 'texto', texto: 'Explicación.' },
+          { tipo: 'ejemplos', items: [
+            { de: 'Guten Tag!', fon: 'GU-ten taac', es: '¡Buenos días!' }
+          ]},
+          { tipo: 'aviso', icono: 'alerta', texto: 'Ojo con esto.' }
+        ]
+      }
+    ]
+  }
+});
+```
+
+2. Añade la etiqueta `<script src="assets/js/data/mi-tema.js"></script>` en
+   `index.html`, junto a las demás de `data/`.
+
+Listo: aparece en el menú, en la portada, en el buscador y en la barra de progreso.
+
+### Tipos de bloque disponibles
+
+| Tipo | Uso |
+|---|---|
+| `texto` | Un párrafo. |
+| `lista` | Viñetas. `estilo`: `corazon`, `estrella`, `check`. Los items pueden ser texto o `{de, es}`. |
+| `ejemplos` | Pares alemán/español con audio. Admite `fon` (fonética). |
+| `tabla` | `encabezados` + `filas`. Una celda `{de:'…'}` se vuelve palabra con audio. |
+| `aviso` | Recuadro de atención con emoji. |
+| `caja` | Agrupa varios bloques bajo un subtítulo. |
+
+Colores de tarjeta: `morado`, `verde`, `azul`, `naranja`, `rosa`, `turquesa`,
+`rojo`, `indigo`, `lima`.
+
+### Iconos
+
+La interfaz no usa emojis: todos los iconos son SVG de trazo definidos en
+[`assets/js/core/iconos.js`](assets/js/core/iconos.js). Heredan el color y el
+tamaño del texto que los rodea (`stroke: currentColor`), así que se adaptan
+solos al tema claro/oscuro y al color de cada tarjeta.
+
+```js
+DE.icono('idea')             // <svg class="ico">…</svg>
+DE.icono('libro', 'ico-lg')  // con clase de tamaño
+DE.iconos.catalogo()         // lista de nombres disponibles
+```
+
+En el HTML estático basta con `<span data-icono="buscar"></span>`: `main.js` lo
+rellena al arrancar. Si se pide un icono que no existe, se dibuja `info` y se
+avisa por consola. Hay alias en español (`atencion`, `truco`, `dinero`,
+`salud`…) para no tener que recordar el nombre exacto.
+
+---
+
+## Compatibilidad
+
+Chrome, Edge, Firefox y Safari actuales. El audio requiere `speechSynthesis`
+(todos menos Firefox en Linux sin voces instaladas). Diseño adaptado a móvil,
+tablet y escritorio, con tema oscuro automático según el sistema.
+
+## Créditos
+
+Contenido gramatical basado en el temario estándar A1–A2 del *Goethe-Institut*.
+La escritura fonética en español sigue la convención de *Alemán para Dummies*
+(Christensen & Fox, Berlitz): se lee tal como se escribe y la sílaba tónica va
+en MAYÚSCULAS.

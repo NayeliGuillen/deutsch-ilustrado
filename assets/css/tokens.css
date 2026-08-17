@@ -1,0 +1,113 @@
+/* ============================================================
+   tokens.css — Variables de diseño (colores, tipografía, ritmo)
+   Un único lugar para cambiar la identidad visual del proyecto.
+   ============================================================ */
+
+:root {
+  /* Superficies */
+  --bg:            #f5f3ef;
+  --bg-elev:       #ffffff;
+  --bg-sunken:     #ebe7e0;
+  --linea:         #e2ddd4;
+  --linea-fuerte:  #cfc8bb;
+
+  /* Texto */
+  --txt:           #1f2430;
+  --txt-suave:     #5d6472;
+  --txt-tenue:     #8b93a1;
+
+  /* Marca */
+  --marca:         #c98a2b;
+  --marca-suave:   #fdf3e0;
+  --marca-fuerte:  #a06d18;
+
+  /* Paleta de las infografías (una por tarjeta) */
+  --c-morado:  #8b5cf6;
+  --c-verde:   #22a06b;
+  --c-azul:    #2f7fe0;
+  --c-naranja: #ef8b2c;
+  --c-rosa:    #e0489a;
+  --c-turquesa:#12a3ac;
+  --c-rojo:    #e2564a;
+  --c-indigo:  #5b5bd6;
+  --c-lima:    #7aa715;
+
+  /* Fondos pastel derivados */
+  --f-morado:  #f4efff;
+  --f-verde:   #e9f8f1;
+  --f-azul:    #eaf3ff;
+  --f-naranja: #fff2e3;
+  --f-rosa:    #ffeef7;
+  --f-turquesa:#e5f7f8;
+  --f-rojo:    #ffeeec;
+  --f-indigo:  #eeeeff;
+  --f-lima:    #f4f8e3;
+
+  /* Semánticos */
+  --ok:        #22a06b;
+  --error:     #e2564a;
+  --aviso:     #d99311;
+
+  /* Tipografía */
+  --f-titulo: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --f-texto:  "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --f-mono:   "Cascadia Mono", "Consolas", monospace;
+
+  /* Ritmo y formas */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-full: 999px;
+
+  --e1: 0 1px 2px rgba(31, 36, 48, .06);
+  --e2: 0 4px 14px rgba(31, 36, 48, .08);
+  --e3: 0 12px 32px rgba(31, 36, 48, .14);
+
+  --sidebar-w: 268px;
+  --topbar-h: 64px;
+  --max-w: 1460px;
+
+  --t-rapida: 140ms ease;
+  --t-media:  260ms cubic-bezier(.2, .8, .3, 1);
+}
+
+/* ---- Tema oscuro ---- */
+:root[data-tema="oscuro"] {
+  --bg:           #14161c;
+  --bg-elev:      #1c1f27;
+  --bg-sunken:    #101216;
+  --linea:        #2b303b;
+  --linea-fuerte: #3a4150;
+
+  --txt:          #e9ecf2;
+  --txt-suave:    #a9b1c0;
+  --txt-tenue:    #7b8494;
+
+  --marca:        #e8b44f;
+  --marca-suave:  #2a2418;
+  --marca-fuerte: #f0c979;
+
+  --c-morado:  #a98bff;
+  --c-verde:   #4cc38a;
+  --c-azul:    #6aa9f5;
+  --c-naranja: #f5a95c;
+  --c-rosa:    #f472b6;
+  --c-turquesa:#3ec8d2;
+  --c-rojo:    #f5837a;
+  --c-indigo:  #8d8df0;
+  --c-lima:    #a8cc3e;
+
+  --f-morado:  #221d33;
+  --f-verde:   #142a22;
+  --f-azul:    #14202f;
+  --f-naranja: #2c2013;
+  --f-rosa:    #2d1725;
+  --f-turquesa:#12262a;
+  --f-rojo:    #2c1a19;
+  --f-indigo:  #1c1c33;
+  --f-lima:    #232a13;
+
+  --e1: 0 1px 2px rgba(0, 0, 0, .4);
+  --e2: 0 4px 14px rgba(0, 0, 0, .45);
+  --e3: 0 12px 32px rgba(0, 0, 0, .55);
+}

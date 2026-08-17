@@ -1,0 +1,217 @@
+/* ============================================================
+   infografia.css — El "mapa mental" ilustrado
+   Reproduce el estilo de las láminas: título central manuscrito,
+   tarjetas numeradas de colores alrededor y anotaciones.
+   ============================================================ */
+
+.infografia {
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-lg);
+  padding: clamp(18px, 3vw, 34px);
+  box-shadow: var(--e2);
+  background-image:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--txt) 7%, transparent) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* ---- Núcleo central --------------------------------------- */
+.info-nucleo {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 28px;
+  padding: 22px 20px;
+  position: relative;
+}
+
+.info-titulo {
+  font-family: var(--f-titulo);
+  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  font-weight: 800;
+  line-height: .95;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  margin: 0;
+  transform: rotate(-1.4deg);
+}
+
+.info-subtitulo {
+  font-family: var(--f-titulo);
+  font-size: clamp(.95rem, 2vw, 1.25rem);
+  color: var(--txt-suave);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Cinta con los colores de la bandera, como en las láminas */
+.info-cinta {
+  display: inline-block;
+  margin: 14px auto 10px;
+  padding: 7px 26px;
+  border-radius: var(--r-sm);
+  background: var(--txt);
+  color: var(--bg-elev);
+  font-family: var(--f-titulo);
+  font-size: .9rem;
+  font-weight: 700;
+  position: relative;
+  box-shadow: var(--e2);
+}
+.info-cinta::before,
+.info-cinta::after {
+  content: ""; position: absolute; top: 0; width: 14px; height: 100%;
+  background: linear-gradient(180deg, #1a1a1a 0 33%, #dd0000 33% 66%, #ffce00 66%);
+}
+.info-cinta::before { left: -14px; border-radius: var(--r-sm) 0 0 var(--r-sm); }
+.info-cinta::after  { right: -14px; border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+
+.info-resumen {
+  font-size: .92rem;
+  color: var(--txt-suave);
+  max-width: 46ch;
+  margin: 6px auto 0;
+}
+
+/* ---- Rejilla de tarjetas ----------------------------------
+   Se usa multicolumna en lugar de grid: las tarjetas tienen
+   alturas muy distintas y así fluyen sin dejar huecos, como en
+   una lámina real (efecto "masonry" con soporte universal).
+   ----------------------------------------------------------- */
+.info-rejilla {
+  columns: 3 290px;
+  column-gap: 18px;
+}
+
+.info-rejilla > .info-card {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+/* ---- Tarjeta numerada ------------------------------------- */
+.info-card {
+  --c: var(--c-morado);
+  --f: var(--f-morado);
+  position: relative;
+  background: var(--f);
+  border: 2px solid var(--c);
+  border-radius: var(--r-md);
+  padding: 18px 16px 16px;
+  transition: transform var(--t-media), box-shadow var(--t-media);
+}
+.info-card:nth-child(odd)  { transform: rotate(-.35deg); }
+.info-card:nth-child(even) { transform: rotate(.35deg); }
+.info-card:hover { transform: rotate(0) translateY(-4px); box-shadow: var(--e3); z-index: 2; }
+
+.info-card-cabecera {
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: 12px;
+}
+
+.info-num {
+  width: 26px; height: 26px; flex: none;
+  display: grid; place-items: center;
+  border-radius: var(--r-full);
+  border: 2px solid var(--c);
+  color: var(--c);
+  font-family: var(--f-titulo);
+  font-weight: 800; font-size: .82rem;
+  background: var(--bg-elev);
+}
+
+.info-card h3 {
+  margin: 0; flex: 1;
+  font-size: .96rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .02em;
+  color: var(--c);
+}
+
+.info-card-icono {
+  color: var(--c);
+  opacity: .85;
+  display: inline-flex;
+}
+.info-card-icono .ico { width: 1.2rem; height: 1.2rem; }
+
+/* Cuerpo interno tipo "cuaderno" */
+.info-caja {
+  background: color-mix(in srgb, var(--bg-elev) 82%, transparent);
+  border: 1.5px dashed color-mix(in srgb, var(--c) 55%, transparent);
+  border-radius: var(--r-sm);
+  padding: 12px 13px;
+  font-size: .87rem;
+  /* Una tabla ancha se desplaza dentro de la caja en vez de desbordarla. */
+  overflow-x: auto;
+}
+.info-caja + .info-caja { margin-top: 10px; }
+.info-caja p:last-child, .info-caja ul:last-child { margin-bottom: 0; }
+
+.info-caja-titulo {
+  font-size: .7rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--c); margin-bottom: 6px;
+}
+
+/* Listas con viñeta de corazón/estrella, como las láminas */
+.info-lista { list-style: none; margin: 0; padding: 0; }
+.info-lista li {
+  position: relative; padding-left: 18px; margin-bottom: 7px; line-height: 1.45;
+}
+.info-lista li::before {
+  content: "•"; position: absolute; left: 2px; top: -1px;
+  color: var(--c); font-weight: 800;
+}
+.info-lista.corazon li::before  { content: "▪"; font-size: .9em; }
+.info-lista.estrella li::before { content: "›"; font-size: 1.1em; top: -3px; }
+.info-lista.check li::before    { content: "✓"; font-size: .9em; }
+
+/* Ejemplos alemán → español */
+.info-ejemplo { margin-bottom: 8px; line-height: 1.4; }
+.info-ejemplo:last-child { margin-bottom: 0; }
+.info-ejemplo .de { border-bottom-color: var(--c); }
+.info-ejemplo .es { display: block; font-size: .8rem; }
+
+/* Tabla dentro de la tarjeta */
+.info-tabla { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.info-tabla th, .info-tabla td { padding: 5px 8px; text-align: left; }
+.info-tabla thead th {
+  color: var(--c); font-size: .68rem; text-transform: uppercase;
+  letter-spacing: .05em; border-bottom: 2px solid color-mix(in srgb, var(--c) 45%, transparent);
+}
+.info-tabla tbody tr + tr td { border-top: 1px solid color-mix(in srgb, var(--c) 22%, transparent); }
+.info-tabla td:first-child { font-weight: 700; white-space: nowrap; }
+
+/* Nota tipo "¡Atención!" */
+.info-aviso {
+  display: flex; gap: 9px; align-items: flex-start;
+  margin-top: 10px; padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--c) 12%, var(--bg-elev));
+  border: 1.5px solid color-mix(in srgb, var(--c) 45%, transparent);
+  font-size: .82rem;
+}
+.info-aviso .icono { flex: none; color: var(--c); display: inline-flex; margin-top: 1px; }
+.info-aviso .icono .ico { width: 1.05rem; height: 1.05rem; }
+
+/* Variantes de color: se aplican con clase .c-<nombre> */
+.c-morado   { --c: var(--c-morado);   --f: var(--f-morado); }
+.c-verde    { --c: var(--c-verde);    --f: var(--f-verde); }
+.c-azul     { --c: var(--c-azul);     --f: var(--f-azul); }
+.c-naranja  { --c: var(--c-naranja);  --f: var(--f-naranja); }
+.c-rosa     { --c: var(--c-rosa);     --f: var(--f-rosa); }
+.c-turquesa { --c: var(--c-turquesa); --f: var(--f-turquesa); }
+.c-rojo     { --c: var(--c-rojo);     --f: var(--f-rojo); }
+.c-indigo   { --c: var(--c-indigo);   --f: var(--f-indigo); }
+.c-lima     { --c: var(--c-lima);     --f: var(--f-lima); }
+
+/* Impresión: la lámina en una hoja */
+@media print {
+  .topbar, .sidebar, .leccion-pie, .btn-audio, .sidebar-backdrop { display: none !important; }
+  .shell { display: block; }
+  .vista { padding: 0; }
+  .infografia { box-shadow: none; border: 0; }
+  .info-card { break-inside: avoid; transform: none !important; }
+}

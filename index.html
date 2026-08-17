@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deutsch Ilustrado · Guía visual para aprender alemán</title>
+  <meta name="description" content="Guía interactiva para aprender alemán desde cero: infografías, pronunciación con audio, vocabulario, flashcards y quiz.">
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/infografia.css">
+</head>
+<body>
+
+<a class="skip-link" href="#vista">Ir al contenido</a>
+
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="btn-menu" aria-label="Abrir menú" aria-expanded="false"
+          data-icono="menu"></button>
+
+  <a class="brand" href="#/inicio">
+    <span class="brand-flag" aria-hidden="true"></span>
+    <span class="brand-text">
+      <strong>Deutsch</strong> Ilustrado
+      <small>Aprende alemán con mapas visuales</small>
+    </span>
+  </a>
+
+  <div class="topbar-tools">
+    <label class="search" role="search">
+      <span class="sr-only">Buscar en la guía</span>
+      <span class="search-ico" data-icono="buscar"></span>
+      <input type="search" id="buscador" placeholder="Buscar palabra, tema o frase…" autocomplete="off">
+    </label>
+
+    <label class="rate">
+      <span class="sr-only">Velocidad de la voz</span>
+      <span data-icono="audio"></span>
+      <input type="range" id="velocidad-voz" min="0.5" max="1.2" step="0.05" value="0.9">
+    </label>
+
+    <button class="icon-btn" id="btn-tema" aria-label="Cambiar tema"></button>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar" aria-label="Lecciones">
+    <p class="sidebar-title">Ruta de aprendizaje</p>
+    <ul class="nav-list" id="nav-lecciones"></ul>
+
+    <div class="progreso-box">
+      <p class="progreso-label">Tu progreso</p>
+      <div class="progreso-barra"><span id="progreso-fill"></span></div>
+      <p class="progreso-texto" id="progreso-texto">0 de 0 lecciones</p>
+      <button class="btn btn-ghost btn-sm" id="btn-reset">Reiniciar progreso</button>
+    </div>
+  </nav>
+
+  <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+  <main id="vista" class="vista" tabindex="-1"></main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- Núcleo -->
+<script src="assets/js/core/app.js"></script>
+<script src="assets/js/core/iconos.js"></script>
+<script src="assets/js/core/store.js"></script>
+<script src="assets/js/core/voz.js"></script>
+<script src="assets/js/core/dom.js"></script>
+<script src="assets/js/core/router.js"></script>
+
+<!-- Datos / lecciones -->
+<script src="assets/js/data/pronunciacion.js"></script>
+<script src="assets/js/data/generos.js"></script>
+<script src="assets/js/data/casos.js"></script>
+<script src="assets/js/data/verbos-regulares.js"></script>
+<script src="assets/js/data/verbos-separables.js"></script>
+<script src="assets/js/data/numeros.js"></script>
+<script src="assets/js/data/adjetivos.js"></script>
+<script src="assets/js/data/vocabulario.js"></script>
+<script src="assets/js/data/frases.js"></script>
+<script src="assets/js/data/quiz.js"></script>
+
+<!-- Vistas -->
+<script src="assets/js/views/panel-voz.js"></script>
+<script src="assets/js/views/infografia.js"></script>
+<script src="assets/js/views/alfabeto.js"></script>
+<script src="assets/js/views/vocabulario.js"></script>
+<script src="assets/js/views/frases.js"></script>
+<script src="assets/js/views/practica.js"></script>
+<script src="assets/js/views/inicio.js"></script>
+<script src="assets/js/views/buscador.js"></script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

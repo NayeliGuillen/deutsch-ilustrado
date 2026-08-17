@@ -1,0 +1,309 @@
+/* ============================================================
+   components.css — Piezas reutilizables de interfaz
+   ============================================================ */
+
+/* ---- Botones ---------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px; border-radius: var(--r-full);
+  border: 1px solid transparent; background: var(--marca); color: #fff;
+  font-weight: 700; font-size: .9rem; cursor: pointer;
+  transition: transform var(--t-rapida), box-shadow var(--t-rapida), background var(--t-rapida);
+  box-shadow: var(--e1);
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(--e2); }
+.btn:active { transform: translateY(0); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+
+.btn-ghost { background: transparent; color: var(--txt-suave); border-color: var(--linea-fuerte); box-shadow: none; }
+.btn-ghost:hover { background: var(--bg-sunken); color: var(--txt); }
+
+.btn-ok { background: var(--ok); }
+.btn-sm { padding: 6px 12px; font-size: .8rem; }
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex: none;
+  border-radius: var(--r-full); border: 1px solid var(--linea);
+  background: var(--bg-elev); cursor: pointer; font-size: 1rem;
+  transition: background var(--t-rapida), transform var(--t-rapida);
+}
+.icon-btn:hover { background: var(--bg-sunken); transform: translateY(-1px); }
+.icon-btn .ico { width: 18px; height: 18px; vertical-align: 0; }
+
+.btn .ico { width: 16px; height: 16px; vertical-align: 0; }
+
+/* ---- Título de sección con icono -------------------------- */
+.titulo-icono { display: flex; align-items: center; gap: 9px; }
+.titulo-icono .ico { width: 1.15em; height: 1.15em; opacity: .9; }
+.titulo-icono small { margin-left: auto; }
+
+/* ---- Botón de audio (altavoz) ----------------------------- */
+.btn-audio {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; flex: none; margin-left: 6px;
+  border-radius: var(--r-full); border: 1px solid transparent;
+  background: var(--marca-suave); color: var(--marca-fuerte);
+  cursor: pointer; line-height: 1;
+  vertical-align: middle; padding: 0;
+  transition: transform var(--t-rapida), background var(--t-rapida);
+}
+.btn-audio .ico { width: 14px; height: 14px; vertical-align: 0; }
+
+/* ---- Botón de favorita (estrella) ------------------------- */
+.btn-favorita {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; flex: none; padding: 0;
+  border-radius: var(--r-full);
+  border: 1px solid var(--linea);
+  background: var(--bg-elev); color: var(--txt-tenue);
+  cursor: pointer;
+  transition: all var(--t-rapida);
+}
+.btn-favorita .ico { width: 15px; height: 15px; vertical-align: 0; }
+.btn-favorita:hover { border-color: var(--marca); color: var(--marca); }
+.btn-favorita.activa {
+  color: var(--marca); border-color: var(--marca);
+  background: var(--marca-suave);
+}
+.btn-favorita.activa .ico { fill: currentColor; }
+.btn-audio:hover { background: var(--marca); color: #fff; transform: scale(1.12); }
+.btn-audio.sonando { animation: pulso .7s ease-in-out infinite; background: var(--marca); color: #fff; }
+
+@keyframes pulso {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.18); }
+}
+
+/* ---- Texto en alemán -------------------------------------- */
+.de {
+  font-weight: 700;
+  color: var(--txt);
+  cursor: pointer;
+  border-bottom: 2px dotted var(--marca);
+}
+.de:hover { color: var(--marca-fuerte); }
+
+.es { color: var(--txt-suave); }
+
+.fonetica {
+  font-family: var(--f-mono);
+  font-size: .82em;
+  color: var(--c-turquesa);
+  font-style: italic;
+}
+
+/* ---- Tarjetas genéricas ----------------------------------- */
+.tarjeta {
+  background: var(--bg-elev);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  box-shadow: var(--e1);
+}
+
+.rejilla { display: grid; gap: 16px; }
+.rejilla-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+/* auto-fill (y no auto-fit) para que una sola tarjeta no se estire
+   a todo el ancho de la fila. */
+.rejilla-3 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.rejilla-4 { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+
+/* ---- Tarjeta de lección (portada) ------------------------- */
+.leccion-card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--bg-elev);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-lg);
+  padding: 20px; color: inherit;
+  position: relative; overflow: hidden;
+  transition: transform var(--t-media), box-shadow var(--t-media), border-color var(--t-media);
+}
+.leccion-card::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 5px;
+  background: var(--acento, var(--marca));
+}
+.leccion-card:hover { transform: translateY(-4px); box-shadow: var(--e3); border-color: var(--acento, var(--marca)); text-decoration: none; }
+.leccion-card .icono { color: var(--acento, var(--marca)); display: block; margin-bottom: 4px; }
+.leccion-card h3 { margin: 0; }
+.leccion-card p { margin: 0; font-size: .87rem; color: var(--txt-suave); }
+.leccion-card .hecha {
+  position: absolute; top: 14px; right: 14px;
+  color: var(--ok); display: inline-flex;
+}
+
+/* ---- Etiquetas / chips ------------------------------------ */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: var(--r-full);
+  background: var(--bg-sunken); border: 1px solid var(--linea);
+  font-size: .8rem; font-weight: 600; color: var(--txt-suave);
+  cursor: pointer; transition: all var(--t-rapida);
+}
+.chip:hover { border-color: var(--marca); color: var(--marca-fuerte); }
+.chip.activo { background: var(--marca); border-color: var(--marca); color: #fff; }
+.chip .ico { width: 15px; height: 15px; vertical-align: 0; opacity: .85; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+
+.badge {
+  display: inline-block; flex: none;
+  padding: 2px 8px; border-radius: var(--r-full);
+  font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+}
+.badge-der { background: var(--f-azul);    color: var(--c-azul); }
+.badge-die { background: var(--f-rosa);    color: var(--c-rosa); }
+.badge-das { background: var(--f-verde);   color: var(--c-verde); }
+.badge-neutro { background: var(--bg-sunken); color: var(--txt-suave); }
+
+/* ---- Tabla ------------------------------------------------ */
+.tabla-envoltura { overflow-x: auto; border-radius: var(--r-md); border: 1px solid var(--linea); }
+table.tabla { width: 100%; border-collapse: collapse; font-size: .88rem; background: var(--bg-elev); }
+table.tabla th, table.tabla td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--linea); }
+table.tabla thead th {
+  background: var(--bg-sunken); font-size: .72rem; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--txt-suave); white-space: nowrap;
+}
+table.tabla tbody tr:last-child td { border-bottom: 0; }
+table.tabla tbody tr:hover { background: var(--bg-sunken); }
+
+/* ---- Vocabulario ------------------------------------------ */
+.vocab-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-elev);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-md);
+  transition: border-color var(--t-rapida), transform var(--t-rapida);
+}
+.vocab-item:hover { border-color: var(--marca); transform: translateX(3px); }
+.vocab-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.vocab-de { font-weight: 700; line-height: 1.25; }
+.vocab-meta { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.vocab-es { font-size: .84rem; color: var(--txt-suave); line-height: 1.3; }
+
+/* ---- Frases ----------------------------------------------- */
+.frase {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 16px; border-radius: var(--r-md);
+  background: var(--bg-elev); border: 1px solid var(--linea);
+}
+.frase-cuerpo { flex: 1; min-width: 0; }
+.frase-de { font-weight: 700; font-size: 1rem; }
+.frase-fon { font-family: var(--f-mono); font-size: .78rem; color: var(--c-turquesa); font-style: italic; }
+.frase-es { font-size: .88rem; color: var(--txt-suave); }
+
+/* ---- Flashcards ------------------------------------------- */
+.flash-zona { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+
+.flash {
+  width: min(460px, 100%); height: 260px;
+  perspective: 1200px; cursor: pointer; background: none; border: 0; padding: 0;
+}
+.flash-inner {
+  /* Es un <span> dentro de un <button>: sin display:block no toma altura. */
+  display: block;
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(.4, .2, .2, 1);
+}
+.flash.volteada .flash-inner { transform: rotateY(180deg); }
+
+.flash-cara {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 26px; text-align: center;
+  border-radius: var(--r-lg); border: 2px solid var(--linea);
+  background: var(--bg-elev); box-shadow: var(--e2);
+}
+.flash-cara.reverso { transform: rotateY(180deg); background: var(--marca-suave); border-color: var(--marca); }
+.flash-palabra { font-family: var(--f-titulo); font-size: 2rem; font-weight: 800; }
+.flash-pista { font-size: .78rem; color: var(--txt-tenue); text-transform: uppercase; letter-spacing: .08em; }
+
+.flash-controles { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.flash-contador { font-size: .85rem; color: var(--txt-suave); }
+
+/* ---- Quiz ------------------------------------------------- */
+.quiz { max-width: 720px; }
+.quiz-pregunta { font-family: var(--f-titulo); font-size: 1.3rem; margin-bottom: 18px; }
+.quiz-opciones { display: grid; gap: 10px; margin-bottom: 18px; }
+
+.quiz-opcion {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; text-align: left; cursor: pointer;
+  background: var(--bg-elev); border: 2px solid var(--linea);
+  border-radius: var(--r-md); font-size: .95rem; font-weight: 600;
+  transition: all var(--t-rapida);
+}
+.quiz-opcion:hover:not([disabled]) { border-color: var(--marca); transform: translateX(4px); }
+.quiz-opcion .letra {
+  width: 26px; height: 26px; flex: none; border-radius: var(--r-full);
+  background: var(--bg-sunken); display: grid; place-items: center;
+  font-size: .78rem; font-weight: 800;
+}
+.quiz-opcion.correcta { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, var(--bg-elev)); }
+.quiz-opcion.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 12%, var(--bg-elev)); }
+
+.quiz-explicacion {
+  padding: 14px 16px; border-radius: var(--r-md);
+  background: var(--f-azul); border-left: 4px solid var(--c-azul);
+  font-size: .9rem; margin-bottom: 16px;
+}
+
+.quiz-barra { height: 6px; background: var(--linea); border-radius: var(--r-full); overflow: hidden; margin-bottom: 22px; }
+.quiz-barra span { display: block; height: 100%; background: var(--marca); transition: width var(--t-media); }
+
+.quiz-resultado { text-align: center; padding: 36px 20px; }
+.quiz-nota { font-family: var(--f-titulo); font-size: 3.4rem; font-weight: 800; color: var(--marca); }
+
+/* ---- Alfabeto --------------------------------------------- */
+.letra-card {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 14px 8px; cursor: pointer; text-align: center;
+  background: var(--bg-elev); border: 1px solid var(--linea);
+  border-radius: var(--r-md);
+  transition: all var(--t-rapida);
+}
+.letra-card:hover { border-color: var(--marca); transform: translateY(-3px); box-shadow: var(--e2); }
+.letra-card .glifo { font-family: var(--f-titulo); font-size: 1.7rem; font-weight: 800; }
+.letra-card .son { font-family: var(--f-mono); font-size: .78rem; color: var(--c-turquesa); }
+.letra-card .ej { font-size: .7rem; color: var(--txt-tenue); }
+
+/* ---- Aviso / nota ----------------------------------------- */
+.nota {
+  display: flex; gap: 12px; padding: 14px 16px;
+  border-radius: var(--r-md); font-size: .9rem;
+  background: var(--f-naranja); border-left: 4px solid var(--c-naranja);
+}
+.nota.truco { background: var(--f-verde); border-left-color: var(--c-verde); }
+.nota.ojo   { background: var(--f-rojo);  border-left-color: var(--c-rojo); }
+.nota p:last-child { margin-bottom: 0; }
+.nota > .ico { width: 20px; height: 20px; flex: none; margin-top: 1px; vertical-align: 0; color: var(--c-naranja); }
+.nota.truco > .ico { color: var(--c-verde); }
+.nota.ojo   > .ico { color: var(--c-rojo); }
+
+/* ---- Toast ------------------------------------------------ */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+  z-index: 300; padding: 12px 22px; border-radius: var(--r-full);
+  background: var(--txt); color: var(--bg);
+  font-size: .88rem; font-weight: 600; box-shadow: var(--e3);
+  opacity: 0; transition: opacity var(--t-media), transform var(--t-media);
+}
+.toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- Estado vacío ----------------------------------------- */
+.vacio { text-align: center; padding: 60px 20px; color: var(--txt-tenue); }
+.ico-vacio {
+  width: 44px; height: 44px;
+  display: block; margin: 0 auto 14px;
+  stroke-width: 1.3; opacity: .55; vertical-align: 0;
+}
+
+/* ---- Navegación entre lecciones --------------------------- */
+.leccion-pie {
+  display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--linea);
+  flex-wrap: wrap;
+}

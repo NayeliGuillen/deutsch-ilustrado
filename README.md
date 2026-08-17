@@ -60,16 +60,25 @@ tal cual y gratis. Una vez publicada tendrás una URL tipo
 `https://TU-USUARIO.github.io/deutsch-ilustrado/` que se abre desde cualquier
 teléfono.
 
+**Paso 1 — crear el repositorio vacío en GitHub.** Git no lo crea solo: si haces
+`push` a un repositorio que no existe, GitHub responde *"repository not found"*.
+Ve a <https://github.com/new>, ponle de nombre `deutsch-ilustrado`, márcalo
+**Public** y **no** añadas README ni .gitignore (ya los hay aquí).
+
+**Paso 2 — conectar y subir.** Sustituye `mi-usuario` por tu nombre de usuario
+real de GitHub:
+
 ```bash
-git init -b main            # ya hecho
-git add -A
-git commit -m "Primera versión"
-git remote add origin https://github.com/TU-USUARIO/deutsch-ilustrado.git
+git remote add origin https://github.com/mi-usuario/deutsch-ilustrado.git
 git push -u origin main
 ```
 
-Después, en GitHub: **Settings → Pages → Source: Deploy from a branch →
-`main` / `/ (root)` → Save**. En un par de minutos la URL está viva.
+**Paso 3 — activar Pages.** En el repositorio: **Settings → Pages → Source:
+Deploy from a branch → `main` / `/ (root)` → Save**. En un par de minutos la URL
+está viva.
+
+> Si te equivocas con la URL, no pasa nada: `git remote remove origin` y vuelves
+> a empezar por el paso 2.
 
 > El repositorio debe ser **público** para usar Pages con una cuenta gratuita.
 > El contenido son apuntes de alemán, así que no hay nada sensible; aun así,

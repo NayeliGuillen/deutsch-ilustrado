@@ -209,6 +209,24 @@
   }
 
   /* ==========================================================
+     Funcionamiento sin conexión
+     ------------------------------------------------------------
+     El service worker solo se registra sobre http(s): abriendo el
+     archivo con doble clic (file://) el navegador lo rechaza, y no
+     pasa nada porque en local ya no hace falta.
+     ========================================================== */
+  function iniciarOffline() {
+    if (!('serviceWorker' in navigator)) return;
+    if (!/^https?:$/.test(window.location.protocol)) return;
+
+    navigator.serviceWorker.register('sw.js').then(function (registro) {
+      console.info('[DE] Modo sin conexión activo.', registro.scope);
+    }).catch(function (e) {
+      console.warn('[DE] No se pudo activar el modo sin conexión.', e);
+    });
+  }
+
+  /* ==========================================================
      Reinicio de progreso
      ========================================================== */
   function iniciarReset() {
@@ -240,6 +258,7 @@
     iniciarAudio();
     iniciarBuscador();
     iniciarReset();
+    iniciarOffline();
 
     document.addEventListener('de:ruta', function () {
       actualizarMenu();

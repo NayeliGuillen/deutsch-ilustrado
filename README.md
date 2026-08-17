@@ -53,6 +53,57 @@ acompaña a cada palabra y frase: está pensada justo para eso.
 
 ---
 
+## Publicarla en internet (y usarla desde el móvil)
+
+Al ser un sitio estático sin backend ni compilación, **GitHub Pages** la sirve
+tal cual y gratis. Una vez publicada tendrás una URL tipo
+`https://TU-USUARIO.github.io/deutsch-ilustrado/` que se abre desde cualquier
+teléfono.
+
+```bash
+git init -b main            # ya hecho
+git add -A
+git commit -m "Primera versión"
+git remote add origin https://github.com/TU-USUARIO/deutsch-ilustrado.git
+git push -u origin main
+```
+
+Después, en GitHub: **Settings → Pages → Source: Deploy from a branch →
+`main` / `/ (root)` → Save**. En un par de minutos la URL está viva.
+
+> El repositorio debe ser **público** para usar Pages con una cuenta gratuita.
+> El contenido son apuntes de alemán, así que no hay nada sensible; aun así,
+> tenlo en cuenta antes de publicar.
+
+### Se instala como una app
+
+La guía incluye un **web app manifest** y un **service worker**, así que en el
+móvil (o en el escritorio) puedes usar *Añadir a pantalla de inicio* / *Instalar*
+y queda como una aplicación más: icono propio, nombre "Deutsch" y a pantalla
+completa, sin barra del navegador.
+
+Y una vez abierta con conexión, **funciona sin conexión**: el service worker
+guarda los 37 archivos de la guía en la caché del navegador (unos 120 KB). Se
+puede estudiar en el metro sin datos. El progreso se guarda en ese navegador, de
+forma independiente al del ordenador.
+
+> Al modificar, añadir o renombrar archivos hay que actualizar la lista
+> `RECURSOS` de [`sw.js`](sw.js) y subir el número de `VERSION`; si no, los
+> navegadores que ya tengan la guía cacheada seguirán sirviendo la versión
+> antigua. El service worker solo se activa sobre `http(s)`: abriendo
+> `index.html` con doble clic (`file://`) se ignora sin dar error.
+
+**Audio en el móvil:** igual que en el escritorio, depende de que el teléfono
+tenga voz alemana.
+- *Android*: Ajustes → Accesibilidad → Texto a voz → motor de Google → Instalar
+  datos de voz → **Deutsch**.
+- *iPhone*: Ajustes → Accesibilidad → Contenido hablado → Voces → **Alemán**.
+
+Si falta, la guía lo detecta y te lo dice en el recuadro de audio, igual que en
+el ordenador.
+
+---
+
 ## Qué incluye
 
 | Sección | Contenido |
@@ -79,8 +130,11 @@ imprimir con `Ctrl+P` para colgarlas en la pared.
 ```
 Curso german/
 ├── index.html                  Único HTML: cascarón de la aplicación
+├── manifest.webmanifest        Metadatos para instalarla como app
+├── sw.js                       Service worker: funciona sin conexión
 ├── README.md
 └── assets/
+    ├── icons/                  Icono en SVG y PNG (192, 512, apple-touch)
     ├── css/
     │   ├── tokens.css          Variables de diseño (colores, tipos, temas)
     │   ├── base.css            Reset, tipografía y utilidades

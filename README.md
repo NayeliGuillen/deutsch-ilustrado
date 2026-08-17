@@ -87,6 +87,26 @@ guarda los 37 archivos de la guía en la caché del navegador (unos 120 KB). Se
 puede estudiar en el metro sin datos. El progreso se guarda en ese navegador, de
 forma independiente al del ordenador.
 
+### Llevar el progreso de un dispositivo a otro
+
+El progreso vive en el `localStorage` del navegador, así que **cada navegador y
+cada dispositivo tiene el suyo** (incluso `file://` y la versión publicada son
+almacenamientos distintos). No hay cuentas ni servidor, a propósito.
+
+Para pasarlo, el botón **Llevar a otro dispositivo** del menú lateral ofrece dos
+vías:
+
+- **Código**: un texto corto (unos 200 caracteres) que copias y te mandas por
+  mensaje; en el otro dispositivo lo pegas y pulsas *Aplicar código*.
+- **Archivo JSON**: descarga y carga. Sirve además de copia de seguridad, útil
+  porque Safari en iPhone borra este almacenamiento tras 7 días sin visitas.
+
+Al importar se **fusiona**, nunca se reemplaza: se unen las lecciones y las
+favoritas de ambos lados y se conserva el mejor resultado del quiz, así que
+puedes sincronizar en cualquier dirección sin perder nada. Solo viaja el
+aprendizaje; el tema, la velocidad de voz y el permiso de audio se quedan en
+cada aparato porque dependen de él.
+
 > Al modificar, añadir o renombrar archivos hay que actualizar la lista
 > `RECURSOS` de [`sw.js`](sw.js) y subir el número de `VERSION`; si no, los
 > navegadores que ya tengan la guía cacheada seguirán sirviendo la versión

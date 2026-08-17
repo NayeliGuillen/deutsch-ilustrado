@@ -229,6 +229,12 @@
   /* ==========================================================
      Reinicio de progreso
      ========================================================== */
+  function iniciarSincronizacion() {
+    document.getElementById('btn-sincronizar').addEventListener('click', function () {
+      DE.sincronizar.abrir();
+    });
+  }
+
   function iniciarReset() {
     document.getElementById('btn-reset').addEventListener('click', function () {
       if (!window.confirm('¿Seguro que quieres borrar tu progreso, favoritas y récord del quiz?')) return;
@@ -257,6 +263,7 @@
     iniciarMenuMovil();
     iniciarAudio();
     iniciarBuscador();
+    iniciarSincronizacion();
     iniciarReset();
     iniciarOffline();
 

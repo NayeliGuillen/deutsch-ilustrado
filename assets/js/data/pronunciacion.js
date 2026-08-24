@@ -18,7 +18,9 @@ DE.registrarLeccion({
   datos: {
     intro: 'Buenas noticias: el alemán se pronuncia casi siempre como se escribe. ' +
            'Una "u" siempre es "u". Aprende estas reglas y podrás leer en voz alta ' +
-           'cualquier palabra, aunque no sepas qué significa. Pulsa cualquier letra para oírla.',
+           'cualquier palabra, aunque no sepas qué significa. En cada tarjeta puedes ' +
+           'escuchar dos cosas: el NOMBRE de la letra (como se recita el alfabeto) y ' +
+           'una palabra de EJEMPLO que empieza por ella.',
 
     alfabeto: [
       { glifo: 'A a', son: 'aa',        ej: 'Apfel (manzana)',    hablar: 'Apfel' },
@@ -45,7 +47,7 @@ DE.registrarLeccion({
       { glifo: 'V v', son: 'fau',       ej: 'Vater (padre)',      hablar: 'Vater' },
       { glifo: 'W w', son: 'vee',       ej: 'Wasser (agua)',      hablar: 'Wasser' },
       { glifo: 'X x', son: 'iks',       ej: 'Taxi',               hablar: 'Taxi' },
-      { glifo: 'Y y', son: 'IUP-si-lon', ej: 'Yoga',              hablar: 'Yoga' },
+      { glifo: 'Y y', son: 'IUP-si-lon', ej: 'Yoga',              hablar: 'Yoga', letra: 'Ypsilon' },
       { glifo: 'Z z', son: 'tset',      ej: 'Zeit (tiempo)',      hablar: 'Zeit' }
     ],
 
@@ -53,7 +55,7 @@ DE.registrarLeccion({
       { glifo: 'Ä ä', son: 'ae',     ej: 'Äpfel (manzanas)', hablar: 'Äpfel' },
       { glifo: 'Ö ö', son: 'oe',     ej: 'Öl (aceite)',      hablar: 'Öl' },
       { glifo: 'Ü ü', son: 'iu',     ej: 'Übung (ejercicio)', hablar: 'Übung' },
-      { glifo: 'ß',   son: 'es-TSET', ej: 'Fuß (pie)',        hablar: 'Fuß' }
+      { glifo: 'ß',   son: 'es-TSET', ej: 'Fuß (pie)',        hablar: 'Fuß', letra: 'Eszett' }
     ],
 
     /* Se dibuja con el mismo motor que las demás láminas. */

@@ -137,7 +137,7 @@ el ordenador.
 
 | Sección | Contenido |
 |---|---|
-| **Alfabeto y pronunciación** | 26 letras + Ä Ö Ü ß, con audio y ejemplo. Vocales largas/cortas, diptongos, `sch`/`ch`/`sp`/`st`, la `r` alemana, acentuación y trabalenguas. |
+| **Alfabeto y pronunciación** | 26 letras + Ä Ö Ü ß, con **dos audios por tarjeta**: el nombre de la letra (para deletrear) y una palabra de ejemplo. Vocales largas/cortas, diptongos, `sch`/`ch`/`sp`/`st`, la `r` alemana, acentuación y trabalenguas. |
 | **Los tres géneros** | der/die/das, artículos definidos e indefinidos, cómo deducir el género por su terminación, plurales. |
 | **Los 4 casos** | Nominativ, Akkusativ, Dativ, Genitiv. Tabla maestra, preposiciones que rigen cada caso y pronombres. |
 | **Verbos regulares** | Terminaciones, método de conjugación, usos, irregularidades ortográficas, `sein` y `haben`. |

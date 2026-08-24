@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v2';
+const VERSION = 'deutsch-ilustrado-v3';
 
 const RECURSOS = [
   './',

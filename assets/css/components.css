@@ -257,18 +257,47 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
 .quiz-resultado { text-align: center; padding: 36px 20px; }
 .quiz-nota { font-family: var(--f-titulo); font-size: 3.4rem; font-weight: 800; color: var(--marca); }
 
-/* ---- Alfabeto --------------------------------------------- */
+/* ---- Alfabeto ---------------------------------------------
+   Dos zonas clicables por tarjeta: arriba el nombre de la letra,
+   abajo la palabra de ejemplo. */
 .letra-card {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 14px 8px; cursor: pointer; text-align: center;
+  display: flex; flex-direction: column;
   background: var(--bg-elev); border: 1px solid var(--linea);
-  border-radius: var(--r-md);
-  transition: all var(--t-rapida);
+  border-radius: var(--r-md); overflow: hidden;
+  transition: border-color var(--t-rapida), transform var(--t-rapida), box-shadow var(--t-rapida);
 }
 .letra-card:hover { border-color: var(--marca); transform: translateY(-3px); box-shadow: var(--e2); }
-.letra-card .glifo { font-family: var(--f-titulo); font-size: 1.7rem; font-weight: 800; }
-.letra-card .son { font-family: var(--f-mono); font-size: .78rem; color: var(--c-turquesa); }
-.letra-card .ej { font-size: .7rem; color: var(--txt-tenue); }
+
+.letra-sonido {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 14px 8px 10px; width: 100%;
+  border: 0; background: none; cursor: pointer; text-align: center;
+  transition: background var(--t-rapida);
+}
+.letra-sonido:hover { background: var(--marca-suave); }
+.letra-sonido .glifo { font-family: var(--f-titulo); font-size: 1.7rem; font-weight: 800; }
+.letra-sonido .son { font-family: var(--f-mono); font-size: .78rem; color: var(--c-turquesa); }
+
+.letra-etiqueta {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
+  font-size: .62rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--txt-tenue); font-weight: 700;
+}
+.letra-etiqueta .ico { width: 11px; height: 11px; vertical-align: 0; }
+.letra-sonido:hover .letra-etiqueta { color: var(--marca-fuerte); }
+
+.letra-ejemplo {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 8px 10px; width: 100%;
+  border: 0; border-top: 1px dashed var(--linea);
+  background: none; cursor: pointer;
+  font-size: .7rem; color: var(--txt-tenue); line-height: 1.25;
+  transition: background var(--t-rapida), color var(--t-rapida);
+}
+.letra-ejemplo:hover { background: var(--bg-sunken); color: var(--txt); }
+.letra-ejemplo .ico { width: 12px; height: 12px; flex: none; vertical-align: 0; color: var(--marca); }
+
+.letra-sonido.sonando, .letra-ejemplo.sonando { background: var(--marca-suave); }
 
 /* ---- Aviso / nota ----------------------------------------- */
 .nota {

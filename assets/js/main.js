@@ -138,8 +138,10 @@
       var objetivo = ev.target.closest('[data-hablar]');
       if (!objetivo) return;
       ev.preventDefault();
+      // Cualquier BOTON recibe la animacion de "sonando"; los <span>
+      // con data-hablar (palabras dentro del texto) no la necesitan.
       DE.voz.hablar(objetivo.getAttribute('data-hablar'),
-        objetivo.classList.contains('btn-audio') ? objetivo : null);
+        objetivo.tagName === 'BUTTON' ? objetivo : null);
     });
 
     // Accesibilidad: las palabras en alemán también responden al teclado.

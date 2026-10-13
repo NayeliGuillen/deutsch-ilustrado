@@ -1,0 +1,271 @@
+/* ============================================================
+   data/vocabulario-koeln.js — Vocabulario nuevo (tarea sobre Köln)
+   ------------------------------------------------------------
+   Cada palabra lleva DOS pronunciaciones:
+     fon      → la transcripción del curso (la misma de las frases:
+                vocal larga = letra doble, sílaba tónica en MAYÚSCULAS).
+     fonFacil → sílabas con guiones y, entre paréntesis, la nota de
+                los sonidos difíciles.
+   Los sustantivos llevan SIEMPRE su artículo (campo `gen`) y,
+   cuando hace falta, su plural. Las palabras que no son sustantivos
+   indican su clase en `tipo`. `nota` es un apunte breve opcional.
+   ============================================================ */
+
+DE.registrarLeccion({
+  id: 'vocabulario-koeln',
+  titulo: 'Vocabulario nuevo: Köln',
+  icono: 'audio',
+  grupo: 'Vocabulario y uso',
+  color: 'rojo',
+  resumen: 'Las palabras de la tarea sobre Köln, con audio, traducción y dos pronunciaciones.',
+  vista: 'vocabulario-pron',
+
+  datos: {
+    intro: 'Pulsa el altavoz (o la palabra) para oírla. Cada una trae su traducción y dos ' +
+           'formas de leer su pronunciación.',
+
+    leyenda: [
+      { titulo: 'Pronunciación', texto: 'La del curso: vocal larga = letra doble (taac), sílaba tónica en MAYÚSCULAS, j = ch suave, c = k.' },
+      { titulo: 'Pronunciación fácil', texto: 'Sílabas separadas con guiones y, entre paréntesis, cómo sale cada sonido difícil.' }
+    ],
+
+    categorias: [
+      {
+        id: 'ciudad-paises', titulo: 'Köln y países', icono: 'ubicacion', color: 'rojo',
+        palabras: [
+          { de: 'Köln', es: 'Colonia', tipo: 'ciudad',
+            fon: 'KOELN',
+            fonFacil: 'KÖLN (ö = "e" con los labios redondeados; una sola sílaba)',
+            nota: 'Colonia en español y Cologne en inglés: cada idioma tiene su propio nombre.' },
+          { de: 'Deutschland', es: 'Alemania', tipo: 'país',
+            fon: 'DOICH-lant',
+            fonFacil: 'DOICH-lant (eu = "oi"; tsch = "ch" de chico; la d final suena "t")',
+            nota: 'Sin artículo: in Deutschland.' },
+          { de: 'deutsch', es: 'alemán (idioma o adjetivo)', tipo: 'adjetivo',
+            fon: 'doich',
+            fonFacil: 'DOICH (eu = "oi"; tsch = "ch" de chico)',
+            nota: 'Deutschland es el país; Deutsch / deutsch es el idioma.' },
+          { de: 'Honduras', es: 'Honduras', tipo: 'país',
+            fon: 'jon-DUU-ras',
+            fonFacil: 'jon-DU-ras (h aspirada; el acento cae en -du-, no en Hon-)',
+            nota: 'Sin artículo: in Honduras.' },
+          { de: 'der Rhein', es: 'el Rin', gen: 'der',
+            fon: 'rain',
+            fonFacil: 'RAIN (ei = "ai"; la r inicial se hace al fondo de la garganta)' }
+        ]
+      },
+      {
+        id: 'lugares', titulo: 'Lugares y atracciones', icono: 'ubicacion', color: 'azul',
+        palabras: [
+          { de: 'die Stadt', es: 'la ciudad', gen: 'die', plural: 'die Städte',
+            fon: 'shtat',
+            fonFacil: 'SHTAT (st inicial = "sht"; la t final se suelta)' },
+          { de: 'der Ort', es: 'el lugar', gen: 'der', plural: 'die Orte',
+            fon: 'ort',
+            fonFacil: 'ORT (la r se relaja casi hasta una "a" suave)' },
+          { de: 'die Sehenswürdigkeit', es: 'la atracción turística', gen: 'die', plural: 'die Sehenswürdigkeiten',
+            fon: 'SEE-ens-viur-dij-cait',
+            fonFacil: 'SE-ens-vür-dich-kait (w = "v"; ü = "i" con labios en "u"; ch suave; ei = "ai")' },
+          { de: 'der Dom', es: 'la catedral', gen: 'der', plural: 'die Dome',
+            fon: 'doom',
+            fonFacil: 'DOM (la o es larga; la m se cierra con los labios)' },
+          { de: 'der Kölner Dom', es: 'la catedral de Colonia', gen: 'der',
+            fon: 'KOEL-nea doom',
+            fonFacil: 'KÖL-na DOM (ö = "e" con labios redondeados; -ner = "na")',
+            nota: 'Kölner = "de Colonia": el nombre de la ciudad + -er.' },
+          { de: 'der Turm', es: 'la torre', gen: 'der', plural: 'die Türme',
+            fon: 'tuam',
+            fonFacil: 'TURM (la r se relaja: casi "tu-am"; la m final se cierra)',
+            nota: 'La pieza de ajedrez que llamas "torre" también es der Turm.' },
+          { de: 'die Stufe', es: 'el escalón', gen: 'die', plural: 'die Stufen',
+            fon: 'SHTUU-fe',
+            fonFacil: 'SHTU-fe (u larga; la e final se pronuncia)' },
+          { de: 'die Brücke', es: 'el puente', gen: 'die', plural: 'die Brücken',
+            fon: 'BRIU-ke',
+            fonFacil: 'BRÜ-ke (ü corta; la e final se pronuncia)' },
+          { de: 'die Hohenzollernbrücke', es: 'el puente Hohenzollern', gen: 'die',
+            fon: 'JOO-en-tsol-lern-briu-ke',
+            fonFacil: 'HO-en-tsol-lern-brü-ke (h aspirada; z = "ts"; -ern = "an"; ü corta)' },
+          { de: 'das Museum', es: 'el museo', gen: 'das', plural: 'die Museen',
+            fon: 'mu-SEE-um',
+            fonFacil: 'mu-SE-um (la s suena como la "z" inglesa; el acento va en -se-)' },
+          { de: 'die Schokolade', es: 'el chocolate', gen: 'die',
+            fon: 'sho-co-LAA-de',
+            fonFacil: 'sho-ko-LA-de (sch = "sh"; la e final se pronuncia)' },
+          { de: 'das Schokoladenmuseum', es: 'el Museo del Chocolate', gen: 'das',
+            fon: 'sho-co-LAA-den-mu-see-um',
+            fonFacil: 'sho-ko-LA-den-mu-SE-um (sch = "sh"; el artículo es el de la última palabra: das Museum)',
+            nota: 'En las palabras compuestas manda la última: Schokolade + das Museum = das Schokoladenmuseum.' },
+          { de: 'das Symbol', es: 'el símbolo', gen: 'das', plural: 'die Symbole',
+            fon: 'sium-BOOL',
+            fonFacil: 'süm-BOL (y = ü; la o es larga; el acento va al final)' }
+        ]
+      },
+      {
+        id: 'personas-cifras', titulo: 'Personas y cifras', icono: 'personas', color: 'rosa',
+        palabras: [
+          { de: 'der Einwohner', es: 'el habitante', gen: 'der', plural: 'die Einwohner',
+            fon: 'AIN-voo-nea',
+            fonFacil: 'AIN-vo-na (ei = "ai"; w = "v"; la h no suena, solo alarga la o; -er = "a")' },
+          { de: 'der Mensch', es: 'la persona', gen: 'der', plural: 'die Menschen',
+            fon: 'mensh',
+            fonFacil: 'MENSH (sch = "sh")',
+            nota: 'En las fichas se usa Menschen para "personas".' },
+          { de: 'der Besucher', es: 'el visitante', gen: 'der', plural: 'die Besucher',
+            fon: 'be-SUU-jea',
+            fonFacil: 'be-SU-ja (la s suena como la "z" inglesa; ch áspera como en "hoch"; -er = "a")' },
+          { de: 'die Zahl', es: 'el número, la cifra', gen: 'die', plural: 'die Zahlen',
+            fon: 'tsaal',
+            fonFacil: 'TSAL (z = "ts"; la a es larga)' },
+          { de: 'die Million', es: 'el millón', gen: 'die', plural: 'die Millionen',
+            fon: 'mil-YOON',
+            fonFacil: 'mil-YON (el acento va al final; la i suena como "y")',
+            nota: 'eine Million, zwei Millionen.' },
+          { de: 'der Einer', es: 'la unidad (en un número)', gen: 'der', plural: 'die Einer',
+            fon: 'AI-nea',
+            fonFacil: 'AI-na (ei = "ai"; -er = "a")',
+            nota: 'En alemán se dicen primero los Einer y luego los Zehner: 21 = einundzwanzig.' },
+          { de: 'der Zehner', es: 'la decena (en un número)', gen: 'der', plural: 'die Zehner',
+            fon: 'TSEE-nea',
+            fonFacil: 'TSE-na (z = "ts"; e larga; -er = "a")' },
+          { de: 'das Wort', es: 'la palabra', gen: 'das', plural: 'die Wörter',
+            fon: 'vort',
+            fonFacil: 'VORT (w = "v"; la r se relaja)',
+            nota: 'in Worten = "en letras" (un número escrito con letras).' },
+          { de: 'circa', es: 'aproximadamente (se escribe ca.)', tipo: 'abreviatura',
+            fon: 'TSIR-ca',
+            fonFacil: 'TSIR-ka (z = "ts"; se lee como palabra entera)',
+            nota: 'Con cifras: ca. 1.200. Con el número en letras es mejor etwa o ungefähr.' }
+        ]
+      },
+      {
+        id: 'tiempo-obra', titulo: 'Tiempo y construcción', icono: 'reloj', color: 'turquesa',
+        palabras: [
+          { de: 'das Jahr', es: 'el año', gen: 'das', plural: 'die Jahre',
+            fon: 'yaar',
+            fonFacil: 'YAR (j = "y"; la a es larga; la r se relaja)',
+            nota: 'Con números el plural no cambia de forma: 632 Jahre.' },
+          { de: 'der Tag', es: 'el día', gen: 'der', plural: 'die Tage',
+            fon: 'taac',
+            fonFacil: 'TAK (a larga; la g final suena "k")' },
+          { de: 'die Bauzeit', es: 'el tiempo de construcción', gen: 'die',
+            fon: 'BAU-tsait',
+            fonFacil: 'BAU-tsait (au como en "causa"; z = "ts"; ei = "ai")',
+            nota: 'der Bau (la obra) + die Zeit (el tiempo) = die Bauzeit.' },
+          { de: 'der Baubeginn', es: 'el inicio de las obras', gen: 'der',
+            fon: 'BAU-be-guin',
+            fonFacil: 'BAU-be-guin (g suave como en "guitarra")' },
+          { de: 'die Eröffnung', es: 'la apertura, la inauguración', gen: 'die', plural: 'die Eröffnungen',
+            fon: 'ea-OEF-nunc',
+            fonFacil: 'er-ÖF-nung (ö = "e" con labios redondeados; la ng final es nasal, sin "g" fuerte)' },
+          { de: 'eröffnet', es: 'inaugurado, abierto', tipo: 'participio',
+            fon: 'ea-OEF-net',
+            fonFacil: 'er-ÖF-net (ö = "e" con labios redondeados)' },
+          { de: 'fertig', es: 'terminado, listo', tipo: 'adjetivo',
+            fon: 'FER-tij',
+            fonFacil: 'FER-tich (la r se relaja; -ig = "ich" suave)' },
+          { de: 'der Zug', es: 'el tren', gen: 'der', plural: 'die Züge',
+            fon: 'tsuuc',
+            fonFacil: 'TSUK (z = "ts"; u larga; la g final suena "k"). Plural: TSÜ-ge (ü = "i" con labios en "u")' }
+        ]
+      },
+      {
+        id: 'medidas', titulo: 'Medidas y descripciones', icono: 'idea', color: 'naranja',
+        palabras: [
+          { de: 'der Meter', es: 'el metro', gen: 'der', plural: 'die Meter',
+            fon: 'MEE-tea',
+            fonFacil: 'ME-ta (e larga; -er = "a"; no se pronuncia la r)',
+            nota: 'Con números no cambia: zwei Meter, hundertsiebenundfünfzig Meter.' },
+          { de: 'hoch', es: 'alto (la altura de las cosas)', tipo: 'adjetivo',
+            fon: 'jooj',
+            fonFacil: 'JOJ (h aspirada; o larga; la ch final es áspera, como la j de "caja")',
+            nota: 'Para cosas se usa hoch; para personas, groß.' },
+          { de: 'lang', es: 'largo', tipo: 'adjetivo',
+            fon: 'lanc',
+            fonFacil: 'LANG (la ng es nasal, como en "tengo", sin "g" fuerte)' },
+          { de: 'über', es: 'más de, sobre', tipo: 'preposición',
+            fon: 'IU-bea',
+            fonFacil: 'Ü-ba (ü larga: "i" con labios en "u"; -er = "a")',
+            nota: 'Delante de un número significa "más de": über 650.000 Besucher.' },
+          { de: 'seit', es: 'desde (tiempo)', tipo: 'preposición',
+            fon: 'sait',
+            fonFacil: 'ZAIT (la s suena como la "z" inglesa; ei = "ai")',
+            nota: 'seit 1993 = desde 1993.' },
+          { de: 'pro', es: 'por (cada)', tipo: 'preposición',
+            fon: 'proo',
+            fonFacil: 'PRO (o larga)',
+            nota: 'pro Tag = por día; pro Jahr = por año.' },
+          { de: 'bis', es: 'hasta', tipo: 'preposición',
+            fon: 'bis',
+            fonFacil: 'BIS (la s final es sorda)',
+            nota: 'bis oben = hasta arriba.' },
+          { de: 'oben', es: 'arriba', tipo: 'adverbio',
+            fon: 'OO-ben',
+            fonFacil: 'O-ben (o larga)' },
+          { de: 'hier', es: 'aquí', tipo: 'adverbio',
+            fon: 'jiia',
+            fonFacil: 'JI-a (h aspirada; ie = "i" larga; la r se relaja en una "a")' }
+        ]
+      },
+      {
+        id: 'verbos', titulo: 'Verbos y expresiones', icono: 'repetir', color: 'verde',
+        palabras: [
+          { de: 'liegen', es: 'estar situado, yacer', tipo: 'verbo',
+            fon: 'LII-guen',
+            fonFacil: 'LI-guen (ie = "i" larga; g suave como en "guerra")',
+            nota: 'Köln liegt in Deutschland. Cortés liegt in Honduras.' },
+          { de: 'fahren', es: 'ir en vehículo, circular', tipo: 'verbo',
+            fon: 'FAA-ren',
+            fonFacil: 'FA-ren (a larga)',
+            nota: 'Jeden Tag fahren hier Züge. Con er/sie/es: der Zug fährt.' },
+          { de: 'kommen', es: 'venir', tipo: 'verbo',
+            fon: 'CO-men',
+            fonFacil: 'KO-men (o corta)',
+            nota: 'Ich komme aus Honduras. Jedes Jahr kommen Besucher.' },
+          { de: 'jeden Tag', es: 'cada día', tipo: 'expresión',
+            fon: 'YEE-den taac',
+            fonFacil: 'YE-den TAK (j = "y"; la g final suena "k")' },
+          { de: 'jedes Jahr', es: 'cada año', tipo: 'expresión',
+            fon: 'YEE-des yaar',
+            fonFacil: 'YE-des YAR (j = "y"; la r se relaja)' },
+          { de: 'am Rhein', es: 'junto al Rin', tipo: 'expresión',
+            fon: 'am rain',
+            fonFacil: 'AM RAIN (am = an + dem; ei = "ai")' },
+          { de: 'in Deutschland', es: 'en Alemania', tipo: 'expresión',
+            fon: 'in DOICH-lant',
+            fonFacil: 'in DOICH-lant (eu = "oi"; tsch = "ch" de chico)',
+            nota: 'Köln, Deutschland: ciudad, coma, país, igual que Cortés, Honduras.' },
+          { de: 'Merke', es: 'recuerda, ten presente', tipo: 'expresión',
+            fon: 'MER-ke',
+            fonFacil: 'MER-ke (la r se relaja; la e final se pronuncia)' }
+        ]
+      },
+      {
+        id: 'numeros-sonidos', titulo: 'Números y sonidos difíciles', icono: 'numeros', color: 'morado',
+        palabras: [
+          { de: 'sechs', es: 'seis', tipo: 'número',
+            fon: 'secs',
+            fonFacil: 'SEKS (chs = "ks", como la x de "six" en inglés)',
+            nota: 'La s no se pierde al unirla: sechshundert (600).' },
+          { de: 'sechzehn', es: 'dieciséis', tipo: 'número',
+            fon: 'SEJ-tseen',
+            fonFacil: 'SEJ-tsen (aquí la ch es suave, como en "ich"; z = "ts")',
+            nota: 'Aquí sí pierde la s: sech-zehn.' },
+          { de: 'sechzig', es: 'sesenta', tipo: 'número',
+            fon: 'SEJ-tsij',
+            fonFacil: 'SEJ-tsich (ch suave; -ig = "ich")' },
+          { de: 'dreißig', es: 'treinta', tipo: 'número',
+            fon: 'DRAI-sij',
+            fonFacil: 'DRAI-sich (ß = "s" sorda; -ig = "ich" suave)' },
+          { de: 'zwölf', es: 'doce', tipo: 'número',
+            fon: 'tsvoelf',
+            fonFacil: 'TSVÖLF (z = "ts"; w = "v"; ö = "e" con labios redondeados)' },
+          { de: 'sechshundertzweiunddreißig', es: 'seiscientos treinta y dos (632)', tipo: 'número',
+            fon: 'secs-JUN-dert-TSVAI-unt-DRAI-sij',
+            fonFacil: 'seks-HUN-dert-TSVAI-unt-DRAI-sich (se dice primero el 2 y luego el 30)',
+            nota: 'Se escribe todo junto, en una sola palabra.' }
+        ]
+      }
+    ]
+  }
+});

@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v3';
+const VERSION = 'deutsch-ilustrado-v4';
 
 const RECURSOS = [
   './',
@@ -39,6 +39,7 @@ const RECURSOS = [
   'assets/js/data/adjetivos.js',
   'assets/js/data/vocabulario.js',
   'assets/js/data/frases.js',
+  'assets/js/data/vocabulario-koeln.js',
   'assets/js/data/quiz.js',
 
   'assets/js/views/panel-voz.js',
@@ -46,6 +47,7 @@ const RECURSOS = [
   'assets/js/views/infografia.js',
   'assets/js/views/alfabeto.js',
   'assets/js/views/vocabulario.js',
+  'assets/js/views/vocabulario-pron.js',
   'assets/js/views/frases.js',
   'assets/js/views/practica.js',
   'assets/js/views/inicio.js',

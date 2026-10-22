@@ -209,6 +209,57 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
 }
 .pron-lineas dd { margin: 0; line-height: 1.4; }
 .pron-nota { margin: 0; font-size: .82rem; color: var(--txt-suave); }
+.pron-cat-desc { margin: -4px 0 12px; font-size: .85rem; color: var(--txt-suave); }
+
+/* Tarjeta con dibujo a la izquierda y contenido a la derecha */
+.pron-item.con-visual {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 6px 14px;
+  align-items: start;
+}
+.pron-cuerpo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pron-visual {
+  width: 64px; height: 64px; padding: 6px;
+  color: var(--cat, var(--txt-suave));
+  display: grid; place-items: center;
+  background: var(--bg-sunken);
+  border-radius: var(--r-md);
+}
+@supports (background: color-mix(in srgb, red 10%, transparent)) {
+  .pron-visual { background: color-mix(in srgb, currentColor 9%, transparent); }
+}
+.pron-visual .ico-pic { width: 44px; height: 44px; stroke-width: 1.2; }
+
+/* Dibujos (DE.pic): línea + relleno suave del mismo color */
+.pic {
+  width: 100%; height: 100%;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.pic .t { fill: currentColor; fill-opacity: .16; }
+.pic .s { fill: currentColor; stroke: none; }
+.pic text { font-family: inherit; }
+
+/* Oración de ejemplo */
+.pron-ejemplo {
+  margin-top: 4px; padding: 10px 12px;
+  background: var(--bg-sunken);
+  border-left: 3px solid var(--cat, var(--linea));
+  border-radius: 0 var(--r-sm, 8px) var(--r-sm, 8px) 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.pron-ej-titulo {
+  margin: 0; font-size: .64rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--txt-tenue);
+}
+.pron-ej-de { margin: 0; font-weight: 600; line-height: 1.4; }
+.pron-ej-es { margin: 0; font-size: .86rem; color: var(--txt-suave); }
+.pron-ejemplo .pron-lineas { margin-top: 4px; }
+
+@media (max-width: 420px) {
+  .pron-item.con-visual { grid-template-columns: 52px minmax(0, 1fr); gap: 6px 10px; }
+  .pron-visual { width: 52px; height: 52px; padding: 4px; }
+  .pron-visual .ico-pic { width: 36px; height: 36px; }
+}
 
 /* ---- Frases ----------------------------------------------- */
 .frase {

@@ -1,10 +1,17 @@
 /* ============================================================
    views/vocabulario-pron.js — Léxico con audio y doble pronunciación
    ------------------------------------------------------------
-   Cada palabra muestra: alemán (con altavoz), traducción, plural,
-   las dos pronunciaciones y, si existe, una nota breve.
-   Los datos usan la misma forma que el vocabulario esencial
-   (categorias → palabras), así el buscador global los encuentra.
+   Cada palabra muestra: dibujo (opcional), alemán con altavoz,
+   traducción, plural, las dos pronunciaciones y, si existen,
+   una nota breve y una oración de ejemplo con su traducción y
+   sus dos pronunciaciones.
+
+   Campos de cada palabra (categorias → palabras):
+     de, es, gen | tipo, plural?, fon, fonFacil, nota?,
+     visual?   → nombre para DE.pic() ('koffer', 'flag:at', 'lang:EN'…)
+     ejemplo?  → { de, es, fon, fonFacil }
+   Los datos usan la misma forma que el vocabulario esencial, así
+   el buscador global los encuentra.
    ============================================================ */
 
 (function () {
@@ -17,21 +24,48 @@
     return '<span class="badge badge-neutro">' + d.esc(p.tipo || 'palabra') + '</span>';
   }
 
-  function entrada(p) {
+  /** Dibujo de la palabra; si no tiene, el icono de su categoría. */
+  function dibujo(p, cat) {
+    var svg = DE.pic ? DE.pic(p.visual) : '';
+    if (!svg && !p.visual) svg = DE.icono(cat.icono, 'ico-pic');
+    if (!svg) svg = DE.icono(cat.icono, 'ico-pic');
+    return '<div class="pron-visual">' + svg + '</div>';
+  }
+
+  /** Bloque con las dos pronunciaciones (palabra u oración). */
+  function lineas(o) {
+    return '<dl class="pron-lineas">' +
+      '<div><dt>Pronunciación</dt><dd class="fonetica">' + d.esc(o.fon) + '</dd></div>' +
+      '<div><dt>Pronunciación fácil</dt><dd class="fonetica">' + d.esc(o.fonFacil) + '</dd></div>' +
+    '</dl>';
+  }
+
+  function ejemplo(ej) {
+    if (!ej) return '';
+    return '<div class="pron-ejemplo">' +
+      '<p class="pron-ej-titulo">Ejemplo</p>' +
+      '<p class="pron-ej-de">' + d.de(ej.de) + '</p>' +
+      '<p class="pron-ej-es">' + d.esc(ej.es) + '</p>' +
+      lineas(ej) +
+    '</div>';
+  }
+
+  function entrada(p, cat) {
     var plural = p.plural
       ? ' <span class="pron-plural">· plural: ' + d.de(p.plural, false) + '</span>'
       : '';
 
-    return '<article class="pron-item">' +
-      '<div class="pron-cabecera">' + insignia(p) +
-        '<span class="pron-de">' + d.de(p.de) + '</span>' +
+    return '<article class="pron-item con-visual" style="--cat:var(--c-' + d.esc(cat.color || 'azul') + ')">' +
+      dibujo(p, cat) +
+      '<div class="pron-cuerpo">' +
+        '<div class="pron-cabecera">' + insignia(p) +
+          '<span class="pron-de">' + d.de(p.de) + '</span>' +
+        '</div>' +
+        '<p class="pron-es">' + d.esc(p.es) + plural + '</p>' +
+        lineas(p) +
+        (p.nota ? '<p class="pron-nota">' + d.esc(p.nota) + '</p>' : '') +
+        ejemplo(p.ejemplo) +
       '</div>' +
-      '<p class="pron-es">' + d.esc(p.es) + plural + '</p>' +
-      '<dl class="pron-lineas">' +
-        '<div><dt>Pronunciación</dt><dd class="fonetica">' + d.esc(p.fon) + '</dd></div>' +
-        '<div><dt>Pronunciación fácil</dt><dd class="fonetica">' + d.esc(p.fonFacil) + '</dd></div>' +
-      '</dl>' +
-      (p.nota ? '<p class="pron-nota">' + d.esc(p.nota) + '</p>' : '') +
     '</article>';
   }
 
@@ -42,7 +76,10 @@
         '<small style="color:var(--txt-tenue);font-weight:400;font-size:.8rem">' +
         cat.palabras.length + '</small>' +
       '</h2>' +
-      '<div class="rejilla rejilla-2">' + cat.palabras.map(entrada).join('') + '</div>' +
+      (cat.descripcion ? '<p class="pron-cat-desc">' + d.esc(cat.descripcion) + '</p>' : '') +
+      '<div class="rejilla rejilla-2">' +
+        cat.palabras.map(function (p) { return entrada(p, cat); }).join('') +
+      '</div>' +
     '</section>';
   }
 

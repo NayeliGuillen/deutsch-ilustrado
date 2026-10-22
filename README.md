@@ -92,7 +92,7 @@ y queda como una aplicación más: icono propio, nombre "Deutsch" y a pantalla
 completa, sin barra del navegador.
 
 Y una vez abierta con conexión, **funciona sin conexión**: el service worker
-guarda los 39 archivos de la guía en la caché del navegador (unos 140 KB). Se
+guarda los 42 archivos de la guía en la caché del navegador (unos 340 KB). Se
 puede estudiar en el metro sin datos. El progreso se guarda en ese navegador, de
 forma independiente al del ordenador.
 
@@ -146,6 +146,8 @@ el ordenador.
 | **Adjetivos** | Cuándo declinan y cuándo no, las tres declinaciones, orden de varios adjetivos, comparativo y superlativo. |
 | **Vocabulario esencial** | 172 palabras en 11 temas, cada sustantivo con su artículo, filtro por categoría y favoritas. |
 | **Vocabulario nuevo: Köln** | 58 palabras de la tarea sobre Köln, con audio, traducción, plural y **dos pronunciaciones**: la del curso y una "fácil", con guiones y notas de los sonidos difíciles. |
+| **Vocabulario nuevo: Kapitel 1** | 47 palabras de saludos, países, idiomas y "Deutsch international", cada una con **dibujo**, audio, traducción, **dos pronunciaciones** y una **oración de ejemplo** que también lleva las dos pronunciaciones. |
+| **Vocabulario nuevo: Kapitel 2** | 71 palabras de hobbys, lugares, quedar con alguien, profesiones, trabajo, objetos y direcciones en la ciudad, con el mismo formato (dibujo, audio, ejemplo y doble pronunciación). |
 | **Frases para conversar** | 88 expresiones reales en 10 situaciones (saludos, restaurante, compras, viaje, trámites, emergencias…), con transcripción fonética. |
 | **Practicar** | Flashcards (mazo completo, por tema o solo tus favoritas ★) y quiz de 10 preguntas barajadas de un banco de 30. |
 
@@ -177,12 +179,14 @@ Curso german/
         │   ├── store.js        Persistencia (localStorage)
         │   ├── voz.js          Síntesis de voz alemana
         │   ├── dom.js          Ayudantes de HTML (siempre con escape)
+        │   ├── pictogramas.js  Dibujos SVG del vocabulario (DE.pic) y banderas
         │   └── router.js       Enrutado por hash (#/leccion)
         ├── data/               CONTENIDO: una lección por archivo
         │   ├── pronunciacion.js  generos.js  casos.js
         │   ├── verbos-regulares.js  verbos-separables.js
         │   ├── numeros.js  adjetivos.js
         │   ├── vocabulario.js  vocabulario-koeln.js  frases.js  quiz.js
+        │   ├── vocabulario-kap1.js  vocabulario-kap2.js
         ├── views/              CÓMO SE DIBUJA cada tipo de lección
         │   ├── panel-voz.js    Recuadro con el estado real del audio
         │   ├── infografia.js   Motor de láminas (lo usan casi todas)
@@ -269,6 +273,18 @@ DE.icono('idea')             // <svg class="ico">…</svg>
 DE.icono('libro', 'ico-lg')  // con clase de tamaño
 DE.iconos.catalogo()         // lista de nombres disponibles
 ```
+
+### Pictogramas del vocabulario
+
+Las palabras de `vocabulario-kap1.js` y `vocabulario-kap2.js` llevan un dibujo propio, definido en [`assets/js/core/pictogramas.js`](assets/js/core/pictogramas.js). Se pide por nombre en el campo `visual` de cada palabra:
+
+```js
+DE.pic('koffer')     // dibujo de una maleta
+DE.pic('flag:at')    // bandera de Austria
+DE.pic('lang:EN')    // burbuja de diálogo con "EN"
+```
+
+Son SVG de trazo con relleno suave del color de la categoría, así que también se adaptan al tema claro/oscuro. Si un nombre no tiene dibujo propio, se usa el icono del mismo nombre de `DE.icono()`.
 
 En el HTML estático basta con `<span data-icono="buscar"></span>`: `main.js` lo
 rellena al arrancar. Si se pide un icono que no existe, se dibuja `info` y se

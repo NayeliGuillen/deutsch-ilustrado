@@ -17,7 +17,8 @@ DE.store = (function () {
 
     completadas: [],         // ids de lecciones terminadas
     mejorQuiz: 0,            // % de acierto más alto
-    favoritas: []            // palabras marcadas para repasar
+    favoritas: [],           // palabras marcadas para repasar
+    dominio: {}              // 'leccion:nivel' -> { mejor: %, intentos: n }
   };
 
   var estado = leer();
@@ -25,11 +26,12 @@ DE.store = (function () {
   function leer() {
     try {
       var crudo = localStorage.getItem(CLAVE);
-      if (!crudo) return Object.assign({}, predeterminado);
-      return Object.assign({}, predeterminado, JSON.parse(crudo));
+      var base = Object.assign({}, predeterminado, { completadas: [], favoritas: [], dominio: {} });
+      if (!crudo) return base;
+      return Object.assign(base, JSON.parse(crudo));
     } catch (e) {
       console.warn('[DE.store] No se pudo leer el progreso guardado.', e);
-      return Object.assign({}, predeterminado);
+      return Object.assign({}, predeterminado, { completadas: [], favoritas: [], dominio: {} });
     }
   }
 
@@ -99,6 +101,23 @@ DE.store = (function () {
       return estado.mejorQuiz;
     },
 
+    /* ---- Dominio por niveles (entrenador) ------------------ */
+
+    dominio: function (clave) {
+      return (estado.dominio && estado.dominio[clave]) || { mejor: 0, intentos: 0 };
+    },
+
+    registrarDominio: function (clave, porcentaje) {
+      if (!estado.dominio) estado.dominio = {};
+      var previo = estado.dominio[clave] || { mejor: 0, intentos: 0 };
+      estado.dominio[clave] = {
+        mejor: Math.max(previo.mejor, porcentaje),
+        intentos: previo.intentos + 1
+      };
+      escribir();
+      return estado.dominio[clave];
+    },
+
     /* ---- Sincronización entre dispositivos -----------------
        Solo viaja el APRENDIZAJE. El tema, la velocidad de la voz
        y el permiso de voz no alemana dependen de cada aparato:
@@ -112,7 +131,8 @@ DE.store = (function () {
         fecha: new Date().toISOString().slice(0, 10),
         completadas: estado.completadas.slice(),
         favoritas: estado.favoritas.slice(),
-        mejorQuiz: estado.mejorQuiz
+        mejorQuiz: estado.mejorQuiz,
+        dominio: JSON.parse(JSON.stringify(estado.dominio || {}))
       };
     },
 
@@ -141,11 +161,21 @@ DE.store = (function () {
       var entrantesCompletadas = textos(datos.completadas);
       var entrantesFavoritas = textos(datos.favoritas);
       var entranteQuiz = Number(datos.mejorQuiz) || 0;
+      var entranteDominio = {};
+      if (datos.dominio && typeof datos.dominio === 'object') {
+        Object.keys(datos.dominio).forEach(function (k) {
+          var v = datos.dominio[k];
+          if (v && typeof v === 'object') {
+            entranteDominio[k] = { mejor: Number(v.mejor) || 0, intentos: Number(v.intentos) || 0 };
+          }
+        });
+      }
 
       if (reemplazar) {
         estado.completadas = entrantesCompletadas;
         estado.favoritas = entrantesFavoritas;
         estado.mejorQuiz = entranteQuiz;
+        estado.dominio = entranteDominio;
       } else {
         // Fusionar: nunca se pierde lo que ya había en este dispositivo.
         var unir = function (a, b) {
@@ -158,6 +188,12 @@ DE.store = (function () {
         estado.completadas = unir(estado.completadas, entrantesCompletadas);
         estado.favoritas = unir(estado.favoritas, entrantesFavoritas);
         estado.mejorQuiz = Math.max(estado.mejorQuiz, entranteQuiz);
+        var actual = estado.dominio || {};
+        Object.keys(entranteDominio).forEach(function (k) {
+          var a = actual[k] || { mejor: 0, intentos: 0 }, b = entranteDominio[k];
+          actual[k] = { mejor: Math.max(a.mejor, b.mejor), intentos: Math.max(a.intentos, b.intentos) };
+        });
+        estado.dominio = actual;
       }
 
       escribir();
@@ -173,7 +209,9 @@ DE.store = (function () {
 
     reiniciar: function () {
       var tema = estado.tema, velocidad = estado.velocidadVoz;
-      estado = Object.assign({}, predeterminado, { tema: tema, velocidadVoz: velocidad });
+      estado = Object.assign({}, predeterminado, {
+        tema: tema, velocidadVoz: velocidad, completadas: [], favoritas: [], dominio: {}
+      });
       escribir();
     }
   };

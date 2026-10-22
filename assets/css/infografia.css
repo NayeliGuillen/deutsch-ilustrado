@@ -215,3 +215,10 @@
   .infografia { box-shadow: none; border: 0; }
   .info-card { break-inside: avoid; transform: none !important; }
 }
+
+/* Tablas anchas en el móvil: el texto se parte y, si aun así no cabe, se desliza. */
+.info-caja { overflow-x: auto; }
+@media (max-width: 560px) {
+  .info-tabla td .nowrap, .info-tabla td:first-child { white-space: normal; }
+  .info-tabla th, .info-tabla td { padding: 5px 5px; }
+}

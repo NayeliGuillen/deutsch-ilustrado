@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v5';
+const VERSION = 'deutsch-ilustrado-v6';
 
 const RECURSOS = [
   './',
@@ -26,6 +26,7 @@ const RECURSOS = [
   'assets/js/core/app.js',
   'assets/js/core/iconos.js',
   'assets/js/core/pictogramas.js',
+  'assets/js/core/mapa.js',
   'assets/js/core/store.js',
   'assets/js/core/voz.js',
   'assets/js/core/dom.js',
@@ -43,6 +44,14 @@ const RECURSOS = [
   'assets/js/data/vocabulario-koeln.js',
   'assets/js/data/vocabulario-kap1.js',
   'assets/js/data/vocabulario-kap2.js',
+  'assets/js/data/dominio-articulos.js',
+  'assets/js/data/entrenamiento-articulos.js',
+  'assets/js/data/dominio-ein-kein.js',
+  'assets/js/data/entrenamiento-ein-kein.js',
+  'assets/js/data/dominio-direcciones.js',
+  'assets/js/data/vocabulario-direcciones.js',
+  'assets/js/data/entrenamiento-direcciones.js',
+  'assets/js/data/entrenamiento-vocabulario.js',
   'assets/js/data/quiz.js',
 
   'assets/js/views/panel-voz.js',
@@ -52,6 +61,7 @@ const RECURSOS = [
   'assets/js/views/vocabulario.js',
   'assets/js/views/vocabulario-pron.js',
   'assets/js/views/frases.js',
+  'assets/js/views/entrenador.js',
   'assets/js/views/practica.js',
   'assets/js/views/inicio.js',
   'assets/js/views/buscador.js',

@@ -92,7 +92,7 @@ y queda como una aplicación más: icono propio, nombre "Deutsch" y a pantalla
 completa, sin barra del navegador.
 
 Y una vez abierta con conexión, **funciona sin conexión**: el service worker
-guarda los 42 archivos de la guía en la caché del navegador (unos 340 KB). Se
+guarda los 53 archivos de la guía en la caché del navegador (unos 480 KB). Se
 puede estudiar en el metro sin datos. El progreso se guarda en ese navegador, de
 forma independiente al del ordenador.
 
@@ -148,6 +148,7 @@ el ordenador.
 | **Vocabulario nuevo: Köln** | 58 palabras de la tarea sobre Köln, con audio, traducción, plural y **dos pronunciaciones**: la del curso y una "fácil", con guiones y notas de los sonidos difíciles. |
 | **Vocabulario nuevo: Kapitel 1** | 47 palabras de saludos, países, idiomas y "Deutsch international", cada una con **dibujo**, audio, traducción, **dos pronunciaciones** y una **oración de ejemplo** que también lleva las dos pronunciaciones. |
 | **Vocabulario nuevo: Kapitel 2** | 71 palabras de hobbys, lugares, quedar con alguien, profesiones, trabajo, objetos y direcciones en la ciudad, con el mismo formato (dibujo, audio, ejemplo y doble pronunciación). |
+| **Domina el tema** | Sección nueva con ocho lecciones: teoría a fondo de **der, die, das**, de **ein, eine, kein, keine** y de **direcciones**; el vocabulario de ciudad y direcciones (36 palabras con dibujo, ejemplo y doble pronunciación); y cuatro entrenamientos por niveles (ver abajo). |
 | **Frases para conversar** | 88 expresiones reales en 10 situaciones (saludos, restaurante, compras, viaje, trámites, emergencias…), con transcripción fonética. |
 | **Practicar** | Flashcards (mazo completo, por tema o solo tus favoritas ★) y quiz de 10 preguntas barajadas de un banco de 30. |
 
@@ -180,17 +181,22 @@ Curso german/
         │   ├── voz.js          Síntesis de voz alemana
         │   ├── dom.js          Ayudantes de HTML (siempre con escape)
         │   ├── pictogramas.js  Dibujos SVG del vocabulario (DE.pic) y banderas
+        │   ├── mapa.js         Planos de ciudad: simulación de rutas y dibujo SVG (DE.mapa)
         │   └── router.js       Enrutado por hash (#/leccion)
         ├── data/               CONTENIDO: una lección por archivo
         │   ├── pronunciacion.js  generos.js  casos.js
         │   ├── verbos-regulares.js  verbos-separables.js
         │   ├── numeros.js  adjetivos.js
         │   ├── vocabulario.js  vocabulario-koeln.js  frases.js  quiz.js
-        │   ├── vocabulario-kap1.js  vocabulario-kap2.js
+        │   ├── vocabulario-kap1.js  vocabulario-kap2.js  vocabulario-direcciones.js
+        │   ├── dominio-articulos.js  dominio-ein-kein.js  dominio-direcciones.js   (teoría)
+        │   ├── entrenamiento-articulos.js  entrenamiento-ein-kein.js
+        │   ├── entrenamiento-direcciones.js  entrenamiento-vocabulario.js   (ejercicios)
         ├── views/              CÓMO SE DIBUJA cada tipo de lección
         │   ├── panel-voz.js    Recuadro con el estado real del audio
         │   ├── infografia.js   Motor de láminas (lo usan casi todas)
         │   ├── alfabeto.js  vocabulario.js  vocabulario-pron.js  frases.js
+        │   ├── entrenador.js   Motor de ejercicios por niveles
         │   ├── practica.js  inicio.js  buscador.js
         └── main.js             Arranque: menú, tema, buscador, audio
 ```
@@ -273,6 +279,16 @@ DE.icono('idea')             // <svg class="ico">…</svg>
 DE.icono('libro', 'ico-lg')  // con clase de tamaño
 DE.iconos.catalogo()         // lista de nombres disponibles
 ```
+
+### Entrenamiento por niveles
+
+La sección **Domina el tema** usa el motor [`views/entrenador.js`](assets/js/views/entrenador.js). Cada lección de entrenamiento es un archivo de datos con una lista de `niveles`; cada nivel tiene sus `ejercicios` o es **automático** (`auto: { tipo, n }`) y se arma al azar con todo el vocabulario de la guía.
+
+Tipos de ejercicio: `opcion`, `escribir`, `ordenar` y `mapa` (`modo: 'lugar'` o `'describir'`). Un nivel se **domina con 90 % o más a la primera**; los fallos se explican (campo `why`) y se repasan al final. La mejor nota de cada nivel se guarda en `DE.store` (`dominio`) y viaja con la copia de progreso.
+
+En los planos (`core/mapa.js`) la respuesta no se escribe a mano: se **calcula** simulando los pasos (`g`, `l`, `r`) sobre una cuadrícula de 4 × 4 cruces. Un ejercicio de mapa solo necesita `mapa`, `inicio:[c,r]`, `dir`, `pasos` y `lado`.
+
+Para comprobar todo el banco a la vez: `DE.entrenador.validar(ejercicio)` devuelve `null` si el ejercicio es correcto.
 
 ### Pictogramas del vocabulario
 

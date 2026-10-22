@@ -458,3 +458,118 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
   margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--linea);
   flex-wrap: wrap;
 }
+
+/* ============================================================
+   Entrenador por niveles (views/entrenador.js)
+   ============================================================ */
+.ent { max-width: 780px; }
+
+.ent-resumen {
+  background: var(--bg-elev); border: 1px solid var(--linea); border-radius: var(--r-md);
+  padding: 14px 16px; margin-bottom: 18px;
+}
+.ent-resumen .quiz-barra { margin: 10px 0 0; }
+.ent-regla { color: var(--txt-tenue); font-size: .85rem; }
+
+.ent-niveles { display: grid; gap: 12px; }
+.ent-nivel {
+  display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center;
+  background: var(--bg-elev); border: 1px solid var(--linea); border-left: 5px solid var(--linea-fuerte);
+  border-radius: var(--r-md); padding: 14px 16px;
+}
+.ent-nivel.practicando { border-left-color: var(--c-naranja); }
+.ent-nivel.dominado { border-left-color: var(--ok); }
+.ent-nivel.perfecto { border-left-color: var(--marca); background: color-mix(in srgb, var(--marca) 8%, var(--bg-elev)); }
+.ent-nivel-num {
+  width: 44px; height: 44px; border-radius: var(--r-full); display: grid; place-items: center;
+  background: var(--bg-sunken); font-family: var(--f-titulo); font-weight: 800; font-size: 1.1rem;
+}
+.ent-nivel-dif { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--txt-tenue); margin: 0 0 2px; }
+.ent-nivel h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.ent-nivel-desc { margin: 0 0 6px; font-size: .9rem; color: var(--txt-suave); }
+.ent-nivel-meta { margin: 0; font-size: .8rem; color: var(--txt-tenue); }
+.ent-nivel-lado { display: grid; gap: 8px; justify-items: end; }
+.ent-sello {
+  font-size: .72rem; font-weight: 800; padding: 3px 10px; border-radius: var(--r-full);
+  background: var(--bg-sunken); color: var(--txt-suave); white-space: nowrap;
+}
+.ent-nivel.dominado .ent-sello { background: color-mix(in srgb, var(--ok) 18%, var(--bg-elev)); color: var(--ok); }
+.ent-nivel.perfecto .ent-sello { background: var(--marca); color: #fff; }
+.ent-nivel.practicando .ent-sello { background: color-mix(in srgb, var(--c-naranja) 20%, var(--bg-elev)); color: var(--c-naranja); }
+
+.ent-barra-sup { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.ent-cuenta { font-size: .85rem; color: var(--txt-suave); }
+
+.ent-enunciado { display: flex; gap: 14px; align-items: center; margin-bottom: 4px; }
+.ent-enunciado .quiz-pregunta { margin-bottom: 16px; flex: 1; }
+.ent-visual { width: 72px; height: 72px; flex: none; color: var(--marca); display: grid; place-items: center; }
+.ent-visual svg { width: 100%; height: 100%; }
+.hueco { display: inline-block; min-width: 3.2em; border-bottom: 3px solid var(--marca); vertical-align: baseline; }
+
+.ent-pista { margin: 0 0 14px; font-size: .88rem; color: var(--txt-suave); }
+.ent-pista summary { cursor: pointer; font-weight: 700; color: var(--marca-fuerte, var(--marca)); }
+.ent-pista p { margin: 6px 0 0; }
+
+.ent-escribir { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.ent-input {
+  flex: 1 1 220px; min-width: 0; padding: 12px 14px; font: inherit; font-size: 1rem;
+  background: var(--bg-elev); color: var(--txt); border: 2px solid var(--linea-fuerte); border-radius: var(--r-md);
+}
+.ent-input:focus { outline: none; border-color: var(--marca); }
+.ent-input.correcta { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, var(--bg-elev)); }
+.ent-input.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 12%, var(--bg-elev)); }
+.ent-nota { font-size: .8rem; color: var(--txt-tenue); margin: 6px 0 14px; }
+
+.ord-respuesta, .ord-banco { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; border-radius: var(--r-md); margin-bottom: 12px; }
+.ord-respuesta { min-height: 58px; background: var(--bg-sunken); border: 2px dashed var(--linea-fuerte); align-content: flex-start; }
+.ord-respuesta.correcta { border-style: solid; border-color: var(--ok); }
+.ord-respuesta.incorrecta { border-style: solid; border-color: var(--error); }
+.ord-ficha {
+  padding: 8px 14px; font: inherit; font-weight: 700; cursor: pointer; border-radius: var(--r-md);
+  background: var(--bg-elev); color: var(--txt); border: 2px solid var(--linea-fuerte);
+  transition: transform var(--t-rapida), border-color var(--t-rapida);
+}
+.ord-ficha:hover { border-color: var(--marca); transform: translateY(-1px); }
+
+.ent-feedback {
+  margin-top: 16px; padding: 14px 16px; border-radius: var(--r-md); border-left: 5px solid var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, var(--bg-elev));
+}
+.ent-feedback.mal { border-left-color: var(--error); background: color-mix(in srgb, var(--error) 10%, var(--bg-elev)); }
+.ent-veredicto { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-weight: 800; font-size: 1.05rem; }
+.ent-veredicto .ico { width: 22px; height: 22px; vertical-align: 0; }
+.ent-feedback.bien .ent-veredicto { color: var(--ok); }
+.ent-feedback.mal .ent-veredicto { color: var(--error); }
+.ent-respuesta { margin: 0 0 6px; }
+.ent-porque { margin: 0 0 12px; font-size: .92rem; }
+.ent-acciones { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+
+/* ---- Planos de ciudad ------------------------------------- */
+.mapa-instruccion {
+  padding: 12px 16px; margin-bottom: 14px; border-radius: var(--r-md);
+  background: var(--bg-elev); border: 1px solid var(--linea); font-size: 1.1rem; font-weight: 700;
+}
+.mapa-instr-fin { display: block; font-size: .8rem; font-weight: 400; color: var(--txt-tenue); margin-top: 4px; }
+.mapa-caja { max-width: 440px; margin: 0 auto 12px; }
+.mapa-svg { width: 100%; height: auto; display: block; }
+.mapa-fondo { fill: var(--bg-sunken); }
+.mapa-calle { fill: var(--linea-fuerte); }
+.mapa-edificio { fill: var(--bg-elev); stroke: var(--linea-fuerte); stroke-width: 2; transition: fill var(--t-rapida), stroke var(--t-rapida); }
+.mapa-art { fill: var(--txt-tenue); font-size: 11px; text-anchor: middle; font-family: var(--f-titulo); }
+.mapa-nom { fill: var(--txt); font-size: 11.5px; font-weight: 800; text-anchor: middle; font-family: var(--f-titulo); }
+.mapa-celda[role="button"] { cursor: pointer; }
+.mapa-celda[role="button"]:hover .mapa-edificio, .mapa-celda[role="button"]:focus .mapa-edificio { stroke: var(--marca); stroke-width: 3.5; }
+.mapa-celda:focus { outline: none; }
+.mapa-celda.ok .mapa-edificio, .mapa-celda.destino .mapa-edificio { fill: color-mix(in srgb, var(--ok) 28%, var(--bg-elev)); stroke: var(--ok); stroke-width: 3.5; }
+.mapa-celda.mal .mapa-edificio { fill: color-mix(in srgb, var(--error) 25%, var(--bg-elev)); stroke: var(--error); stroke-width: 3.5; }
+.mapa-ruta { fill: none; stroke: var(--c-azul); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2 10; opacity: .95; }
+.mapa-flecha-punta { fill: var(--c-azul); }
+.mapa-yo { fill: var(--c-naranja); stroke: #fff; stroke-width: 3; }
+.mapa-yo-flecha { fill: #fff; }
+
+@media (max-width: 560px) {
+  .ent-nivel { grid-template-columns: 38px 1fr; }
+  .ent-nivel-lado { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; justify-items: start; align-items: center; }
+  .ent-nivel-num { width: 38px; height: 38px; }
+  .ent-visual { width: 56px; height: 56px; }
+}

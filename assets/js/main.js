@@ -15,6 +15,7 @@
     'Primeros pasos',
     'Gramática esencial',
     'Vocabulario y uso',
+    'Domina el tema',
     'Practicar'
   ];
 

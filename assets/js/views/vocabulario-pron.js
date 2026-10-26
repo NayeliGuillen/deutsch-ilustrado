@@ -29,7 +29,12 @@
     var svg = DE.pic ? DE.pic(p.visual) : '';
     if (!svg && !p.visual) svg = DE.icono(cat.icono, 'ico-pic');
     if (!svg) svg = DE.icono(cat.icono, 'ico-pic');
-    return '<div class="pron-visual">' + svg + '</div>';
+    return '<div class="pron-visual-caja">' +
+      '<div class="pron-visual" data-foto="' + d.esc(p.de) + '">' + svg + '</div>' +
+      (p.tipo === 'frase' ? '' :
+        '<button type="button" class="foto-btn" data-foto-abrir="' + d.esc(p.de) + '" data-foto-es="' + d.esc(p.es) + '" ' +
+        'aria-label="Añadir una foto a ' + d.esc(p.de) + '">' + DE.icono('camara') + '</button>') +
+    '</div>';
   }
 
   /** Bloque con las dos pronunciaciones (palabra u oración). */
@@ -109,6 +114,39 @@
       ));
     }
 
+    /* Fotos propias: cargar una carpeta y cómo nombrarlas */
+    var fotos = d.crear(
+      '<details class="fotos-barra">' +
+        '<summary>' + DE.icono('camara') + ' Fotos propias: pon tu imagen en cada palabra</summary>' +
+        '<div class="fotos-barra-cuerpo">' +
+          '<p>Pulsa el icono de cámara de cualquier palabra para pegar, subir o buscar una foto. Para muchas de una vez, ' +
+          'nombra cada archivo como la palabra <strong>sin artículo y en minúsculas</strong> ' +
+          '(<code>handtuch.jpg</code>, <code>strasse.jpg</code>, <code>u-bahn.jpg</code>; ä → ae, ö → oe, ü → ue, ß → ss) y cárgalos juntos:</p>' +
+          '<div class="foto-botones">' +
+            '<button type="button" class="btn btn-sm" data-carpeta>' + DE.icono('subir') + ' Cargar carpeta de fotos</button>' +
+          '</div>' +
+          '<input type="file" accept="image/*" multiple webkitdirectory hidden data-in-carpeta>' +
+          '<p class="foto-ayuda" data-carpeta-estado role="status" aria-live="polite"></p>' +
+          '<p class="foto-ayuda">Para que se vean en todos tus dispositivos, sube esos archivos a la carpeta ' +
+          '<code>' + d.esc(DE.fotos.carpeta) + '</code> del proyecto (formato .jpg).</p>' +
+        '</div>' +
+      '</details>'
+    );
+    frag.appendChild(fotos);
+    fotos.querySelector('[data-carpeta]').addEventListener('click', function () {
+      fotos.querySelector('[data-in-carpeta]').click();
+    });
+    fotos.querySelector('[data-in-carpeta]').addEventListener('change', function (ev) {
+      var estado = fotos.querySelector('[data-carpeta-estado]');
+      var archivos = ev.target.files;
+      if (!archivos.length) return;
+      estado.textContent = 'Preparando ' + archivos.length + ' archivos…';
+      DE.fotos.cargarCarpeta(archivos).then(function (r) {
+        estado.textContent = r.hechas + ' fotos guardadas' + (r.falladas ? ' · ' + r.falladas + ' no se pudieron leer' : '') + '.';
+        ev.target.value = '';
+      });
+    });
+
     /* Filtros por categoría */
     var barra = d.crear(
       '<div class="chips"><button type="button" class="chip activo" data-filtro="todas">Todas</button>' +
@@ -121,6 +159,12 @@
 
     var contenido = d.crear('<div>' + datos.categorias.map(seccion).join('') + '</div>');
     frag.appendChild(contenido);
+
+    contenido.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-foto-abrir]');
+      if (b) DE.fotos.abrir(b.getAttribute('data-foto-abrir'), b.getAttribute('data-foto-es'));
+    });
+    DE.fotos.aplicar(contenido);
 
     /* Filtrado en cliente (sin recargar la vista) */
     barra.addEventListener('click', function (ev) {

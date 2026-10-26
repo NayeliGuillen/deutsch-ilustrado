@@ -573,3 +573,93 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
   .ent-nivel-num { width: 38px; height: 38px; }
   .ent-visual { width: 56px; height: 56px; }
 }
+
+/* ============================================================
+   Fotos propias (core/fotos.js)
+   ============================================================ */
+.pron-visual-caja { position: relative; width: 64px; height: 64px; }
+.pron-visual-caja .pron-visual { width: 100%; height: 100%; }
+.foto-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pron-visual.con-foto { padding: 0; overflow: hidden; }
+.pron-item.con-visual.tiene-foto { grid-template-columns: 104px minmax(0, 1fr); }
+.pron-item.tiene-foto .pron-visual-caja { width: 104px; height: 104px; }
+
+.foto-btn {
+  position: absolute; right: -6px; bottom: -6px; width: 28px; height: 28px; padding: 0;
+  display: grid; place-items: center; cursor: pointer;
+  background: var(--bg-elev); color: var(--txt-suave);
+  border: 1.5px solid var(--linea-fuerte); border-radius: var(--r-full);
+  box-shadow: var(--e1, 0 1px 3px rgba(0,0,0,.15));
+}
+.foto-btn:hover, .foto-btn:focus-visible { color: var(--marca-fuerte, var(--marca)); border-color: var(--marca); }
+.foto-btn .ico { width: 15px; height: 15px; vertical-align: 0; }
+
+.ent-visual:empty { display: none; }
+.ent-visual.con-foto { width: 112px; height: 112px; border-radius: var(--r-md); overflow: hidden; }
+
+.fotos-barra {
+  margin-bottom: 16px; background: var(--bg-elev); border: 1px solid var(--linea);
+  border-radius: var(--r-md); padding: 4px 14px;
+}
+.fotos-barra summary { cursor: pointer; padding: 10px 0; font-weight: 700; font-size: .92rem; display: flex; align-items: center; gap: 8px; }
+.fotos-barra summary .ico { width: 18px; height: 18px; vertical-align: 0; }
+.fotos-barra-cuerpo { padding-bottom: 12px; font-size: .9rem; color: var(--txt-suave); }
+.fotos-barra-cuerpo p { margin: 0 0 10px; line-height: 1.5; }
+.fotos-barra code, .foto-dialogo code { background: var(--bg-sunken); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
+
+/* ---- Ventana ---------------------------------------------- */
+.foto-dialogo {
+  width: min(560px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0;
+  border-radius: 20px; background: var(--bg-elev); color: var(--txt);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.foto-dialogo::backdrop { background: rgba(20,22,28,.55); }
+.foto-caja { padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.foto-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.foto-etq { margin: 0 0 4px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--txt-tenue); }
+.foto-cab h2 { margin: 0; font-size: 1.4rem; }
+.foto-cab h2 small { font-size: .55em; font-weight: 400; color: var(--txt-suave); }
+.foto-x {
+  width: 44px; height: 44px; flex: none; display: grid; place-items: center; cursor: pointer;
+  background: var(--bg-elev); color: var(--txt-suave); border: 1.5px solid var(--linea-fuerte); border-radius: 12px;
+}
+.foto-zona {
+  border: 2.5px dashed var(--linea-fuerte); border-radius: 18px; padding: 22px 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  background: var(--bg-sunken); transition: border-color var(--t-rapida), background var(--t-rapida);
+}
+.foto-zona.encima { border-color: var(--marca); background: color-mix(in srgb, var(--marca) 10%, var(--bg-sunken)); }
+.foto-zona-icono { width: 54px; height: 54px; border-radius: var(--r-full); display: grid; place-items: center; background: color-mix(in srgb, var(--marca) 16%, var(--bg-elev)); color: var(--marca-fuerte, var(--marca)); }
+.foto-zona-icono .ico { width: 28px; height: 28px; vertical-align: 0; }
+.foto-zona-t { margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--txt-suave); }
+.foto-zona-s { margin: 0; font-size: .82rem; color: var(--txt-tenue); }
+.foto-botones { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+.foto-botones .btn { min-height: 44px; }
+.foto-buscar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.foto-buscar .btn { min-height: 44px; }
+.foto-ayuda { margin: 0; font-size: .82rem; color: var(--txt-tenue); line-height: 1.45; }
+.foto-ayuda.mal, .foto-estado.mal { color: var(--error); }
+.foto-estado { margin: 0; min-height: 1.2em; font-size: .85rem; font-weight: 700; color: var(--txt-suave); }
+.foto-rejilla { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+.foto-sug { padding: 0; border: 2px solid var(--linea); border-radius: 10px; overflow: hidden; cursor: pointer; background: var(--bg-sunken); aspect-ratio: 1; }
+.foto-sug:hover, .foto-sug:focus-visible { border-color: var(--marca); }
+.foto-sug img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-previa { display: flex; gap: 14px; align-items: center; border: 1px solid var(--linea); border-radius: 14px; padding: 12px; }
+.foto-previa[hidden], .foto-sugerencias[hidden] { display: none; }
+.foto-previa img { width: 84px; height: 84px; object-fit: cover; border-radius: 10px; flex: none; }
+.foto-prev-t { margin: 0 0 2px; font-weight: 700; word-break: break-word; }
+.foto-prev-d { margin: 0; font-size: .82rem; color: var(--txt-suave); }
+.foto-nota { display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 10px 12px; border-radius: 12px; font-size: .85rem; line-height: 1.45;
+  background: var(--f-azul); border: 1.5px solid color-mix(in srgb, var(--c-azul) 40%, transparent); }
+.foto-nota .ico { width: 18px; height: 18px; flex: none; margin-top: 1px; vertical-align: 0; color: var(--c-azul); }
+.foto-pie { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.foto-pie-esp { flex: 1; }
+.foto-pie .btn { min-height: 46px; }
+
+@media (max-width: 420px) {
+  .pron-visual-caja { width: 52px; height: 52px; }
+  .pron-item.con-visual.tiene-foto { grid-template-columns: 88px minmax(0, 1fr); }
+  .pron-item.tiene-foto .pron-visual-caja { width: 88px; height: 88px; }
+  .foto-rejilla { grid-template-columns: repeat(2, 1fr); }
+  .foto-caja { padding: 16px; }
+}

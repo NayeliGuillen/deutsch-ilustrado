@@ -16,7 +16,7 @@
     return {
       t: 'opcion', fijo: true,
       p: '¿Qué artículo lleva "' + palabra + '"? (' + es + ')',
-      ops: A, ok: A.indexOf(gen), why: why, visual: visual, audio: gen + ' ' + palabra
+      ops: A, ok: A.indexOf(gen), why: why, visual: visual, foto: palabra, audio: gen + ' ' + palabra
     };
   }
 
@@ -25,14 +25,14 @@
     return {
       t: 'opcion', fijo: true,
       p: '¿Qué artículo lleva "' + palabra + '" (' + piezas + ')? ' + es,
-      ops: A, ok: A.indexOf(gen), why: why, audio: gen + ' ' + palabra
+      ops: A, ok: A.indexOf(gen), why: why, foto: palabra, audio: gen + ' ' + palabra
     };
   }
 
   /** Escribir una palabra con su artículo a partir del español. */
   function esc(es, de, why, pista) {
     return { t: 'escribir', p: 'Escribe en alemán, con artículo: ' + es, ok: [de], why: why,
-      pista: pista || 'Primero decide el artículo, luego escribe la palabra con mayúscula.', audio: de };
+      pista: pista || 'Primero decide el artículo, luego escribe la palabra con mayúscula.', foto: de, audio: de };
   }
 
   DE.registrarLeccion({

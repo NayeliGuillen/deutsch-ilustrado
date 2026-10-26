@@ -13,14 +13,14 @@
   function sig(de, es, otros, visual) {
     var ops = [es].concat(otros);
     return { t: 'opcion', p: '¿Qué significa "' + de + '"?', ops: ops, ok: 0,
-      why: de + ' = ' + es + '.', visual: visual, audio: de };
+      why: de + ' = ' + es + '.', visual: visual, foto: de, audio: de };
   }
 
   /** "¿Cómo se dice X?" (español → alemán). */
   function dec(es, de, otros, why) {
     var ops = [de].concat(otros);
     return { t: 'opcion', p: '¿Cómo se dice "' + es + '" en alemán?', ops: ops, ok: 0,
-      why: why || (es + ' = ' + de + '.'), audio: de };
+      why: why || (es + ' = ' + de + '.'), foto: de, audio: de };
   }
 
   var GEN = { Post: 'die', Bahnhof: 'der', Schule: 'die', Hotel: 'das', Apotheke: 'die',

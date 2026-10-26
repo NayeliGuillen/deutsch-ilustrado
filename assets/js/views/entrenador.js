@@ -156,10 +156,10 @@
         if (auto.tipo === 'articulo') {
           return { t: 'opcion', p: '¿Qué artículo lleva "' + sinArticulo(p) + '"? (' + p.es + ')',
             ops: ['der', 'die', 'das'], ok: ['der', 'die', 'das'].indexOf(p.gen), why: why,
-            visual: p.visual, audio: p.de };
+            visual: p.visual, foto: p.de, audio: p.de };
         }
         return { t: 'escribir', p: 'Escribe SOLO el artículo (der, die o das) de: ' + sinArticulo(p) +
-          ' (' + p.es + ')', ok: [p.gen], why: why, visual: p.visual, audio: p.de };
+          ' (' + p.es + ')', ok: [p.gen], why: why, visual: p.visual, foto: p.de, audio: p.de };
       });
     }
 
@@ -170,7 +170,7 @@
           .map(function (q) { return q.es; })).slice(0, 3);
         var ops = barajar([p.es].concat(otras));
         return { t: 'opcion', p: '¿Qué significa "' + p.de + '"?', ops: ops, ok: ops.indexOf(p.es),
-          why: p.de + ' = ' + p.es + '.', visual: p.visual, audio: p.de };
+          why: p.de + ' = ' + p.es + '.', visual: p.visual, foto: p.de, audio: p.de };
       });
       return out;
     }
@@ -182,7 +182,7 @@
         var otras = unicos(mismo.map(function (q) { return q.de; })).slice(0, 3);
         var ops = barajar([p.de].concat(otras));
         return { t: 'opcion', p: '¿Cómo se dice "' + p.es + '" en alemán, con su artículo?',
-          ops: ops, ok: ops.indexOf(p.de), why: p.es + ' = ' + p.de + '.', visual: p.visual, audio: p.de };
+          ops: ops, ok: ops.indexOf(p.de), why: p.es + ' = ' + p.de + '.', visual: p.visual, foto: p.de, audio: p.de };
       });
     }
 
@@ -191,7 +191,7 @@
       return elegidas.map(function (p) {
         return { t: 'escribir', p: 'Escribe en alemán, con su artículo: ' + p.es,
           ok: [p.de], why: p.es + ' = ' + p.de + '. Con mayúscula inicial en el sustantivo.',
-          pista: 'Empieza por ' + p.gen + '…', visual: p.visual, audio: p.de };
+          pista: 'Empieza por ' + p.gen + '…', visual: p.visual, foto: p.de, audio: p.de };
       });
     }
 
@@ -346,11 +346,15 @@
         ordenar: dibujarOrdenar, mapa: dibujarMapa
       }[ex.t];
       dibujar(zona, ex, finalizar);
+      DE.fotos.aplicar(marco);
       window.scrollTo(0, 0);
     }
 
     function enunciado(ex, texto) {
-      var v = ex.visual && DE.pic ? '<div class="ent-visual">' + DE.pic(ex.visual) + '</div>' : '';
+      var dib = ex.visual && DE.pic ? DE.pic(ex.visual) : '';
+      var v = (dib || ex.foto)
+        ? '<div class="ent-visual"' + (ex.foto ? ' data-foto="' + d.esc(ex.foto) + '"' : '') + '>' + dib + '</div>'
+        : '';
       var oir = ex.audio ? ' ' + d.audio(ex.audio) : '';
       return '<div class="ent-enunciado">' + v + '<p class="quiz-pregunta">' + texto + oir + '</p></div>' +
         (ex.pista ? '<details class="ent-pista"><summary>Pista</summary><p>' + d.esc(ex.pista) + '</p></details>' : '');

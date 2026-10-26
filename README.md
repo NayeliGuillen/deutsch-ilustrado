@@ -92,7 +92,7 @@ y queda como una aplicación más: icono propio, nombre "Deutsch" y a pantalla
 completa, sin barra del navegador.
 
 Y una vez abierta con conexión, **funciona sin conexión**: el service worker
-guarda los 53 archivos de la guía en la caché del navegador (unos 480 KB). Se
+guarda los 54 archivos de la guía en la caché del navegador (unos 480 KB). Se
 puede estudiar en el metro sin datos. El progreso se guarda en ese navegador, de
 forma independiente al del ordenador.
 
@@ -289,6 +289,10 @@ Tipos de ejercicio: `opcion`, `escribir`, `ordenar` y `mapa` (`modo: 'lugar'` o 
 En los planos (`core/mapa.js`) la respuesta no se escribe a mano: se **calcula** simulando los pasos (`g`, `l`, `r`) sobre una cuadrícula de 4 × 4 cruces. Un ejercicio de mapa solo necesita `mapa`, `inicio:[c,r]`, `dir`, `pasos` y `lado`.
 
 Para comprobar todo el banco a la vez: `DE.entrenador.validar(ejercicio)` devuelve `null` si el ejercicio es correcto.
+
+### Fotos propias en las palabras
+
+[`core/fotos.js`](assets/js/core/fotos.js) deja poner una foto en cada palabra del vocabulario con pronunciación y en los ejercicios. Prioridad: (1) tu foto guardada en el navegador (IndexedDB), que puedes pegar con Ctrl + V, subir, hacer con la cámara, elegir entre sugerencias de Openverse o cargar en bloque con "Cargar carpeta de fotos"; (2) los archivos de [`assets/img/palabras/`](assets/img/palabras/) nombrados `palabra-sin-articulo.jpg`; (3) el dibujo de la guía. Las fotos del navegador no viajan con la copia de progreso.
 
 ### Pictogramas del vocabulario
 

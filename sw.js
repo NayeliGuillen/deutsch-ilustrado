@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v6';
+const VERSION = 'deutsch-ilustrado-v7';
 
 const RECURSOS = [
   './',
@@ -30,6 +30,7 @@ const RECURSOS = [
   'assets/js/core/store.js',
   'assets/js/core/voz.js',
   'assets/js/core/dom.js',
+  'assets/js/core/fotos.js',
   'assets/js/core/router.js',
 
   'assets/js/data/pronunciacion.js',

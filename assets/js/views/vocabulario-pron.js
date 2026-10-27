@@ -20,6 +20,7 @@
   var d = DE.dom;
 
   function insignia(p) {
+    if (p.soloPlural) return '<span class="badge badge-pl">die · plural</span>';
     if (p.gen) return '<span class="badge badge-' + d.esc(p.gen) + '">' + d.esc(p.gen) + '</span>';
     return '<span class="badge badge-neutro">' + d.esc(p.tipo || 'palabra') + '</span>';
   }
@@ -55,6 +56,28 @@
     '</div>';
   }
 
+  var PRONOMBRES = ['ich', 'du', 'er / es / sie', 'wir', 'ihr', 'sie / Sie'];
+  var PRON_ES = ['yo', 'tú', 'él / ella / ello', 'nosotros', 'vosotros / ustedes', 'ellos / usted'];
+  var CLASES = { regular: 'regular', irregular: 'irregular', separable: 'separable', modal: 'modal' };
+
+  /** Tabla desplegable con las seis formas; las irregulares van en rojo. */
+  function conjugacion(p) {
+    if (!Array.isArray(p.conj)) return '';
+    var irr = p.irr || [];
+    var filas = p.conj.map(function (f, i) {
+      var pr = PRONOMBRES[i].split(' / ')[0];
+      var oir = (i === 2 ? 'er' : i === 5 ? 'sie' : pr) + ' ' + f;
+      return '<tr><th scope="row">' + d.esc(PRONOMBRES[i]) + '</th>' +
+        '<td class="' + (irr.indexOf(i) > -1 ? 'conj-irr' : '') + '">' + d.esc(f) + '</td>' +
+        '<td class="conj-es">' + d.esc(PRON_ES[i]) + '</td>' +
+        '<td>' + d.audio(oir, 'Oír ' + oir) + '</td></tr>';
+    }).join('');
+    return '<details class="conj"><summary>Ver conjugación</summary>' +
+      '<div class="tabla-envoltura"><table class="tabla conj-tabla"><tbody>' + filas + '</tbody></table></div>' +
+      (irr.length ? '<p class="conj-aviso">En rojo: lo que cambia respecto a la regla.</p>' : '') +
+    '</details>';
+  }
+
   function entrada(p, cat) {
     var plural = p.plural
       ? ' <span class="pron-plural">· plural: ' + d.de(p.plural, false) + '</span>'
@@ -65,10 +88,12 @@
       '<div class="pron-cuerpo">' +
         '<div class="pron-cabecera">' + insignia(p) +
           '<span class="pron-de">' + d.de(p.de) + '</span>' +
+          (p.clase ? '<span class="badge badge-clase clase-' + d.esc(p.clase) + '">' + d.esc(CLASES[p.clase] || p.clase) + '</span>' : '') +
         '</div>' +
         '<p class="pron-es">' + d.esc(p.es) + plural + '</p>' +
         lineas(p) +
         (p.nota ? '<p class="pron-nota">' + d.esc(p.nota) + '</p>' : '') +
+        conjugacion(p) +
         ejemplo(p.ejemplo) +
       '</div>' +
     '</article>';
@@ -102,6 +127,10 @@
         '<p class="intro">' + d.esc(datos.intro) + '</p>' +
       '</header>'
     ));
+
+    if (total && datos.categorias.some(function (c) { return c.palabras.some(function (p) { return p.gen || p.soloPlural; }); })) {
+      frag.appendChild(d.crear(DE.art.leyenda()));
+    }
 
     /* Cómo leer las dos pronunciaciones */
     if (datos.leyenda && datos.leyenda.length) {

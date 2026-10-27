@@ -12,7 +12,10 @@
   var d = DE.dom;
 
   /* ---- Renderizado de un bloque ------------------------------
-     Tipos admitidos: texto | lista | ejemplos | tabla | aviso | caja
+     Tipos admitidos: texto | lista | ejemplos | tabla | aviso | caja |
+       recuadro  { clase:'G'|'!'|'dicho'|'frases', etiqueta?:'LIBRO'|'EXTRA', titulo?, bloques:[…] }
+       lectura   { titulo, etiqueta?, modo:'dialogo'|'texto', lineas:[{q?,de,es}], glosario?:[{de,es}] }
+                 diálogo o texto con botón "Ver traducción" (todo a la vez o línea a línea)
   ------------------------------------------------------------ */
   function bloque(b) {
     switch (b.tipo) {
@@ -36,6 +39,12 @@
       case 'caja':
         return caja(b, (b.bloques || []).map(interior).join(''));
 
+      case 'recuadro':
+        return recuadro(b);
+
+      case 'lectura':
+        return lectura(b);
+
       default:
         console.warn('[infografia] Tipo de bloque desconocido:', b.tipo);
         return '';
@@ -51,6 +60,66 @@
       case 'tabla':    return d.tablaInfo(b.encabezados, normalizarFilas(b.filas));
       default:         return bloque(b);
     }
+  }
+
+  /* ---- Etiqueta de origen: [LIBRO] o [EXTRA] ---- */
+  function etiqueta(t) {
+    if (!t) return '';
+    var clase = /^extra/i.test(t) ? 'etq-extra' : 'etq-libro';
+    return '<span class="etq ' + clase + '">' + d.esc(t) + '</span>';
+  }
+
+  /* ---- Recuadros del libro: G (gramática), ! (importante), "Gut gesagt", frases ---- */
+  var MARCAS = { 'G': 'G', '!': '!', dicho: '\u201C' };
+
+  function recuadro(b) {
+    var clase = b.clase || '!';
+    var marca = clase === 'frases' ? DE.icono('mensaje') : d.esc(MARCAS[clase] || '!');
+    return '<div class="info-rec rec-' + d.esc(clase === '!' ? 'imp' : clase) + '">' +
+      '<span class="rec-marca" data-sin-color aria-hidden="true">' + marca + '</span>' +
+      '<div class="rec-cuerpo">' +
+        ((b.titulo || b.etiqueta) ? '<p class="rec-titulo">' + etiqueta(b.etiqueta) + (b.titulo ? d.esc(b.titulo) : '') + '</p>' : '') +
+        (b.bloques || []).map(interior).join('') +
+      '</div></div>';
+  }
+
+  /* ---- Lectura con traducción plegable ---- */
+  function lectura(b) {
+    var dialogo = b.modo === 'dialogo';
+    var qs = [], lineas = (b.lineas || []).map(function (l) {
+      var quien = '';
+      if (dialogo) {
+        var k = qs.indexOf(l.q);
+        if (k === -1) { qs.push(l.q); k = qs.length - 1; }
+        quien = ' q' + (k % 2);
+      }
+      return '<div class="lec-linea' + quien + '">' +
+        (dialogo ? '<span class="lec-punto" aria-hidden="true"></span>' : '') +
+        '<div class="lec-texto">' +
+          ((dialogo && l.q && l.mostrarQ !== false && b.nombres) ? '<span class="lec-q">' + d.esc(l.q) + '</span>' : '') +
+          '<p class="lec-de">' + d.de(l.de) + '</p>' +
+          '<p class="lec-es">' + d.esc(l.es) + '</p>' +
+        '</div>' +
+        '<button type="button" class="lec-uno" aria-label="Ver la traducción de esta línea" aria-pressed="false">ES</button>' +
+      '</div>';
+    }).join('');
+
+    var todo = (b.lineas || []).map(function (l) { return l.de; }).join(' ');
+    return '<div class="info-lectura lec' + (dialogo ? ' lec-dialogo' : '') + '">' +
+      '<div class="lec-cabecera">' +
+        '<p class="lec-titulo">' + etiqueta(b.etiqueta) + (b.titulo ? d.esc(b.titulo) : '') + '</p>' +
+        '<div class="lec-acciones">' +
+          d.audio(todo, 'todo el texto') +
+          '<button type="button" class="btn btn-sm btn-ghost lec-todo" aria-pressed="false">Ver traducción</button>' +
+        '</div>' +
+      '</div>' +
+      (b.contexto ? '<p class="lec-contexto">' + d.esc(b.contexto) + '</p>' : '') +
+      '<div class="lec-lineas">' + lineas + '</div>' +
+      (b.glosario && b.glosario.length
+        ? '<details class="lec-glosario"><summary>Palabras del texto</summary><ul>' +
+          b.glosario.map(function (g) { return '<li>' + d.de(g.de) + ' <span class="es">— ' + d.esc(g.es) + '</span></li>'; }).join('') +
+          '</ul></details>' : '') +
+    '</div>';
   }
 
   function caja(b, contenido) {
@@ -89,7 +158,7 @@
     return '<article class="info-card c-' + d.esc(t.color || 'morado') + '">' +
       '<header class="info-card-cabecera">' +
         '<span class="info-num">' + d.esc(t.n) + '</span>' +
-        '<h3>' + d.esc(t.titulo) + '</h3>' +
+        '<h3>' + (t.etiqueta ? etiqueta(t.etiqueta) : '') + d.esc(t.titulo) + '</h3>' +
         (t.icono ? '<span class="info-card-icono">' + DE.icono(t.icono) + '</span>' : '') +
       '</header>' +
       (t.bloques || []).map(bloque).join('') +
@@ -111,7 +180,32 @@
         '</div>' +
       '</section>';
 
-    return d.crear(html);
+    var nodo = d.crear(html);
+    activarLecturas(nodo);
+    return nodo;
+  }
+
+  /** Botones "Ver traducción": todo el texto o línea por línea. */
+  function activarLecturas(raiz) {
+    raiz.addEventListener('click', function (ev) {
+      var todo = ev.target.closest('.lec-todo');
+      if (todo) {
+        var cont = todo.closest('.lec');
+        var ver = !cont.classList.contains('ver-es');
+        cont.classList.toggle('ver-es', ver);
+        cont.querySelectorAll('.lec-linea.es-uno').forEach(function (l) { l.classList.remove('es-uno'); });
+        cont.querySelectorAll('.lec-uno').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        todo.setAttribute('aria-pressed', String(ver));
+        todo.textContent = ver ? 'Ocultar traducción' : 'Ver traducción';
+        return;
+      }
+      var uno = ev.target.closest('.lec-uno');
+      if (uno) {
+        var linea = uno.closest('.lec-linea');
+        var abierta = linea.classList.toggle('es-uno');
+        uno.setAttribute('aria-pressed', String(abierta));
+      }
+    });
   }
 
   /* Expuesto para que otras vistas (alfabeto) lo reutilicen. */

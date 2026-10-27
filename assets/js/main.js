@@ -14,8 +14,14 @@
     'Inicio',
     'Primeros pasos',
     'Gramática esencial',
+    'Verbos',
+    'Hablar y escribir',
+    'Libro · Kapitel 3',
+    'Libro · Kapitel 4',
+    'Libro · Kapitel 5',
     'Vocabulario y uso',
     'Domina el tema',
+    'Examen de la semana',
     'Practicar'
   ];
 
@@ -280,6 +286,7 @@
     });
 
     DE.router.iniciar(document.getElementById('vista'));
+    DE.art.iniciar();
     actualizarProgreso();
 
     console.info('%cDeutsch Ilustrado v' + DE.version,

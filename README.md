@@ -149,6 +149,11 @@ el ordenador.
 | **Vocabulario nuevo: Kapitel 1** | 47 palabras de saludos, países, idiomas y "Deutsch international", cada una con **dibujo**, audio, traducción, **dos pronunciaciones** y una **oración de ejemplo** que también lleva las dos pronunciaciones. |
 | **Vocabulario nuevo: Kapitel 2** | 71 palabras de hobbys, lugares, quedar con alguien, profesiones, trabajo, objetos y direcciones en la ciudad, con el mismo formato (dibujo, audio, ejemplo y doble pronunciación). |
 | **Domina el tema** | Sección nueva con ocho lecciones: teoría a fondo de **der, die, das**, de **ein, eine, kein, keine** y de **direcciones**; el vocabulario de ciudad y direcciones (36 palabras con dibujo, ejemplo y doble pronunciación); y cuatro entrenamientos por niveles (ver abajo). |
+| **Verbos** | **Verbos nuevos y conjugación** (64 verbos con dibujo, audio, doble pronunciación, ejemplo y tabla de conjugación con las formas irregulares en rojo), **Conjugación: todas las reglas** (terminaciones, cambios de vocal, sein/haben, modales, separables, errores típicos) y un entrenamiento de 7 niveles. |
+| **Libro · Kapitel 3 / 4 / 5** | Transcripción de las páginas del libro (Kap. 3: pp. 30–37 · Kap. 4: pp. 44–53 · Kap. 5: pp. 54–56). Por capítulo: **vocabulario** con pronunciación y pronunciación fácil, **el libro paso a paso** (diálogos y textos con traducción plegable, recuadros G / [!] / "Gut gesagt" y "kurz und klar") y un **entrenamiento** con ejercicios al estilo del libro. Cada parte lleva etiqueta [LIBRO] o [EXTRA]. Donde la foto cortaba el texto se indica con […]. |
+| **Hablar y escribir** | Entrenamiento para **formar oraciones**, 8 **conversaciones** reales con traducción plegable, **alemán real** (saludos regionales, reacciones, forma hablada, palabras de amigos, con aviso de registro) y su entrenamiento. |
+| **Vocabulario: el tiempo** | Días, meses, estaciones, partes del día, la hora, frecuencia y ordinales (60 palabras con doble pronunciación). |
+| **Examen de la semana** | Guía del examen y seis entrenadores (hora con relojes, fechas/ordinales/meses/estaciones, números, der-die-das + ein/kein con cajas de colores, direcciones con planos al azar y simulacros mixtos). Todo se genera al azar. |
 | **Frases para conversar** | 88 expresiones reales en 10 situaciones (saludos, restaurante, compras, viaje, trámites, emergencias…), con transcripción fonética. |
 | **Practicar** | Flashcards (mazo completo, por tema o solo tus favoritas ★) y quiz de 10 preguntas barajadas de un banco de 30. |
 
@@ -284,11 +289,15 @@ DE.iconos.catalogo()         // lista de nombres disponibles
 
 La sección **Domina el tema** usa el motor [`views/entrenador.js`](assets/js/views/entrenador.js). Cada lección de entrenamiento es un archivo de datos con una lista de `niveles`; cada nivel tiene sus `ejercicios` o es **automático** (`auto: { tipo, n }`) y se arma al azar con todo el vocabulario de la guía.
 
-Tipos de ejercicio: `opcion`, `escribir`, `ordenar` y `mapa` (`modo: 'lugar'` o `'describir'`). Un nivel se **domina con 90 % o más a la primera**; los fallos se explican (campo `why`) y se repasan al final. La mejor nota de cada nivel se guarda en `DE.store` (`dominio`) y viaja con la copia de progreso.
+Tipos de ejercicio: `opcion`, `escribir`, `ordenar` (también con `piezas` para ordenar líneas de un diálogo), `mapa` (`modo: 'lugar'` o `'describir'`), `clasificar` (arrastrar a cajas de colores), `unir` (emparejar columnas) y `completar` (huecos dentro de un texto). Un nivel puede mezclar `ejercicios` escritos a mano con `auto`; los tipos automáticos (`hora-*`, `num-*`, `ordinal`, `mes-*`, `conj-*`, `ein-kein`, `art-akk`, `mapa-azar`, `clasificar-articulos`…) viven en [`core/generadores.js`](assets/js/core/generadores.js) y se combinan con `tipo: 'mixto'`. Un nivel se **domina con 90 % o más a la primera**; los fallos se explican (campo `why`) y se repasan al final. La mejor nota de cada nivel se guarda en `DE.store` (`dominio`) y viaja con la copia de progreso.
 
 En los planos (`core/mapa.js`) la respuesta no se escribe a mano: se **calcula** simulando los pasos (`g`, `l`, `r`) sobre una cuadrícula de 4 × 4 cruces. Un ejercicio de mapa solo necesita `mapa`, `inicio:[c,r]`, `dir`, `pasos` y `lado`.
 
 Para comprobar todo el banco a la vez: `DE.entrenador.validar(ejercicio)` devuelve `null` si el ejercicio es correcto.
+
+### Colores de los artículos
+
+[`core/articulos.js`](assets/js/core/articulos.js) colorea solo, en toda la página, los artículos: **der rojo · die azul · das verde · plural morado**. Mira el género real del sustantivo en el vocabulario (por eso *den Käse* sale rojo y *die Hotels* morado). Para excluir un trozo: `data-sin-color`.
 
 ### Fotos propias en las palabras
 

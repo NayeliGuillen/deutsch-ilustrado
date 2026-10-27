@@ -222,3 +222,66 @@
   .info-tabla td .nowrap, .info-tabla td:first-child { white-space: normal; }
   .info-tabla th, .info-tabla td { padding: 5px 5px; }
 }
+
+/* ============================================================
+   Recuadros del libro y lecturas con traducción
+   ============================================================ */
+
+/* Etiquetas de origen */
+.etq {
+  display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: var(--r-full); vertical-align: 2px;
+  font-size: .62rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; font-family: var(--f-texto);
+}
+.etq-libro { background: color-mix(in srgb, var(--c-naranja) 18%, var(--bg-elev)); color: var(--marca-fuerte); border: 1px solid color-mix(in srgb, var(--c-naranja) 45%, transparent); }
+.etq-extra { background: color-mix(in srgb, var(--c-turquesa) 16%, var(--bg-elev)); color: var(--c-turquesa); border: 1px solid color-mix(in srgb, var(--c-turquesa) 45%, transparent); }
+
+/* Recuadros: G · ! · Gut gesagt · frases */
+.info-rec {
+  --rc: var(--c-naranja);
+  position: relative; display: flex; gap: 12px; margin-top: 12px; padding: 12px 14px 12px 12px;
+  border-radius: var(--r-md); border: 2px solid var(--rc);
+  background: color-mix(in srgb, var(--rc) 7%, var(--bg-elev));
+}
+.rec-G { --rc: var(--c-naranja); }
+.rec-imp { --rc: #4a5a73; }
+.rec-dicho { --rc: var(--c-azul); }
+.rec-frases { --rc: var(--c-rojo); }
+.rec-marca {
+  flex: none; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 7px;
+  background: var(--rc); color: #fff; font-weight: 900; font-size: 1.05rem; font-family: var(--f-titulo);
+}
+.rec-marca .ico { width: 17px; height: 17px; vertical-align: 0; }
+.rec-cuerpo { min-width: 0; flex: 1; font-size: .88rem; }
+.rec-titulo { margin: 0 0 6px; font-weight: 800; color: var(--rc); font-size: .9rem; }
+.rec-cuerpo p { margin: 0 0 6px; }
+.rec-cuerpo .info-ejemplo { margin: 4px 0; }
+.rec-cuerpo .info-tabla { margin: 4px 0 6px; }
+.rec-cuerpo .info-lista { margin: 4px 0 6px; }
+
+/* Lecturas y diálogos */
+.info-lectura {
+  margin-top: 12px; padding: 12px 14px; border-radius: var(--r-md);
+  background: var(--bg-elev); border: 1.5px solid var(--linea-fuerte); border-left: 5px solid var(--c, var(--marca));
+}
+.lec-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.lec-titulo { margin: 0; font-weight: 800; font-family: var(--f-titulo); font-size: 1rem; }
+.lec-acciones { display: flex; align-items: center; gap: 8px; }
+.lec-contexto { margin: 0 0 8px; font-size: .82rem; color: var(--txt-suave); font-style: italic; }
+.lec-lineas { display: grid; gap: 6px; }
+.lec-linea { display: flex; align-items: flex-start; gap: 10px; padding: 6px 4px; border-radius: var(--r-sm); }
+.lec-linea:nth-child(even) { background: color-mix(in srgb, var(--txt) 3%, transparent); }
+.lec-punto { flex: none; width: 12px; height: 12px; margin-top: 7px; border-radius: 50%; border: 2px solid var(--txt-suave); }
+.lec-linea.q1 .lec-punto { background: var(--txt-suave); }
+.lec-texto { flex: 1; min-width: 0; }
+.lec-q { display: inline-block; margin-bottom: 1px; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--txt-tenue); }
+.lec-de { margin: 0; line-height: 1.5; font-size: .95rem; }
+.lec-es { margin: 3px 0 0; display: none; font-size: .85rem; color: var(--txt-suave); padding-left: 10px; border-left: 3px solid var(--c-turquesa); }
+.lec.ver-es .lec-es, .lec-linea.es-uno .lec-es { display: block; }
+.lec-uno {
+  flex: none; align-self: center; font: inherit; font-size: .62rem; font-weight: 800; letter-spacing: .05em; cursor: pointer;
+  padding: 2px 7px; border-radius: var(--r-full); color: var(--txt-suave); background: var(--bg-sunken); border: 1px solid var(--linea-fuerte);
+}
+.lec-uno[aria-pressed="true"] { background: var(--c-turquesa); border-color: var(--c-turquesa); color: #fff; }
+.lec-glosario { margin-top: 10px; font-size: .85rem; }
+.lec-glosario summary { cursor: pointer; font-weight: 800; color: var(--marca-fuerte); }
+.lec-glosario ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }

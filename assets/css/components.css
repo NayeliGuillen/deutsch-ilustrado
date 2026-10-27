@@ -151,9 +151,23 @@
   padding: 2px 8px; border-radius: var(--r-full);
   font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
 }
-.badge-der { background: var(--f-azul);    color: var(--c-azul); }
-.badge-die { background: var(--f-rosa);    color: var(--c-rosa); }
-.badge-das { background: var(--f-verde);   color: var(--c-verde); }
+.badge-der { background: var(--fart-der); color: var(--art-der); }
+.badge-die { background: var(--fart-die); color: var(--art-die); }
+.badge-das { background: var(--fart-das); color: var(--art-das); }
+.badge-pl  { background: var(--fart-pl);  color: var(--art-pl); }
+
+/* ---- Artículos de colores: der rojo · die azul · das verde · plural morado ---- */
+.art-der { color: var(--art-der); font-weight: 800; }
+.art-die { color: var(--art-die); font-weight: 800; }
+.art-das { color: var(--art-das); font-weight: 800; }
+.art-pl  { color: var(--art-pl);  font-weight: 800; }
+.quiz-opcion .art-der, .quiz-opcion .art-die, .quiz-opcion .art-das, .quiz-opcion .art-pl { font-size: 1.05em; }
+.leyenda-art { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.leyenda-art span { padding: 3px 12px; border-radius: var(--r-full); font-size: .82rem; font-weight: 800; }
+.leyenda-art .l-der { background: var(--fart-der); color: var(--art-der); }
+.leyenda-art .l-die { background: var(--fart-die); color: var(--art-die); }
+.leyenda-art .l-das { background: var(--fart-das); color: var(--art-das); }
+.leyenda-art .l-pl  { background: var(--fart-pl);  color: var(--art-pl); }
 .badge-neutro { background: var(--bg-sunken); color: var(--txt-suave); }
 
 /* ---- Tabla ------------------------------------------------ */
@@ -663,3 +677,136 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
   .foto-rejilla { grid-template-columns: repeat(2, 1fr); }
   .foto-caja { padding: 16px; }
 }
+
+/* ============================================================
+   Ejercicios nuevos: reloj, texto, clasificar, unir, completar
+   ============================================================ */
+
+/* ---- Reloj analógico ---- */
+.reloj { display: block; max-width: 100%; height: auto; }
+.rj-cara { fill: var(--bg-elev); stroke: var(--txt); stroke-width: 3; }
+.rj-marca { stroke: var(--txt-tenue); stroke-width: 1; }
+.rj-marca-g { stroke: var(--txt); stroke-width: 2.2; }
+.rj-num { fill: var(--txt); font-size: 11px; font-weight: 800; font-family: var(--f-titulo); }
+.rj-hora { stroke: var(--txt); stroke-width: 5; stroke-linecap: round; }
+.rj-min { stroke: var(--c-rojo); stroke-width: 3; stroke-linecap: round; }
+.rj-centro { fill: var(--txt); }
+.ent-visual.es-reloj { width: 150px; height: 150px; border-radius: 50%; }
+.ent-reloj { width: 100%; height: 100%; }
+.quiz-opcion.con-grafico { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
+.quiz-opcion.con-grafico .reloj { width: 104px; height: 104px; }
+.quiz-opciones:has(.con-grafico) { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+/* ---- Texto de lectura junto a la pregunta ---- */
+.ent-texto {
+  margin: 0 0 14px; padding: 12px 16px; border-radius: var(--r-md);
+  background: var(--bg-sunken); border-left: 5px solid var(--c-turquesa);
+}
+.ent-texto > summary { cursor: pointer; font-weight: 800; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--txt-suave); }
+.ent-texto p { margin: 8px 0 0; line-height: 1.55; }
+.ent-texto-es { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--linea-fuerte); }
+.ent-texto-es summary { cursor: pointer; font-weight: 700; color: var(--marca-fuerte); font-size: .88rem; }
+.ent-texto-es p { color: var(--txt-suave); }
+
+/* ---- Cajas de colores (clasificar) ---- */
+.cls-der   { --c: var(--art-der); --f: var(--fart-der); }
+.cls-die   { --c: var(--art-die); --f: var(--fart-die); }
+.cls-das   { --c: var(--art-das); --f: var(--fart-das); }
+.cls-pl    { --c: var(--art-pl);  --f: var(--fart-pl); }
+.cls-verde { --c: var(--c-verde); --f: var(--f-verde); }
+.cls-azul { --c: var(--c-azul); --f: var(--f-azul); }
+.cls-rojo { --c: var(--c-rojo); --f: var(--f-rojo); }
+.cls-naranja { --c: var(--c-naranja); --f: var(--f-naranja); }
+.cls-morado { --c: var(--c-morado); --f: var(--f-morado); }
+.cls-rosa { --c: var(--c-rosa); --f: var(--f-rosa); }
+.cls-turquesa { --c: var(--c-turquesa); --f: var(--f-turquesa); }
+.cls-indigo { --c: var(--c-indigo); --f: var(--f-indigo); }
+.cls-lima { --c: var(--c-lima); --f: var(--f-lima); }
+
+.cls-banco {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; margin-bottom: 14px; min-height: 64px;
+  border-radius: var(--r-md); background: var(--bg-sunken); border: 2px dashed var(--linea-fuerte);
+  align-content: flex-start; transition: border-color var(--t-rapida), background var(--t-rapida);
+}
+.cls-banco.sobre { border-color: var(--marca); background: var(--marca-suave); }
+.cls-vacio { color: var(--txt-tenue); font-size: .85rem; align-self: center; }
+.cls-cajas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.cls-caja {
+  border-radius: var(--r-md); border: 3px solid var(--c); background: var(--f);
+  display: flex; flex-direction: column; min-height: 124px; overflow: hidden;
+  transition: transform var(--t-rapida), box-shadow var(--t-rapida);
+}
+.cls-caja.sobre { transform: scale(1.025); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 30%, transparent); }
+.cls-caja-t { margin: 0; padding: 7px 10px; background: var(--c); color: #fff; font-weight: 800; text-align: center; font-size: .95rem; }
+.cls-caja-in { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; flex: 1; align-content: flex-start; }
+.cls-ficha {
+  display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
+  padding: 7px 12px; font: inherit; font-weight: 700; cursor: grab; border-radius: var(--r-md);
+  background: var(--bg-elev); color: var(--txt); border: 2px solid var(--linea-fuerte);
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: border-color var(--t-rapida), background var(--t-rapida);
+}
+.cls-ficha small { font-weight: 400; font-size: .7rem; color: var(--txt-tenue); }
+.cls-ficha em { font-style: normal; font-weight: 700; font-size: .7rem; color: var(--error); }
+.cls-ficha:hover { border-color: var(--marca); }
+.cls-ficha.sel { border-color: var(--marca); background: var(--marca-suave); box-shadow: 0 0 0 3px color-mix(in srgb, var(--marca) 35%, transparent); }
+.cls-ficha.arrastrando { opacity: .35; }
+.cls-ficha.correcta { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--bg-elev)); cursor: default; }
+.cls-ficha.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 14%, var(--bg-elev)); cursor: default; }
+.cls-fantasma {
+  position: fixed; z-index: 1000; pointer-events: none; transform: translate(-50%, -60%) rotate(-3deg);
+  box-shadow: var(--e3); border-color: var(--marca); background: var(--bg-elev); cursor: grabbing;
+}
+
+/* ---- Unir columnas ---- */
+.unir { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.unir-col { display: grid; gap: 8px; align-content: start; }
+.unir-ficha {
+  display: flex; align-items: center; gap: 8px; text-align: left; padding: 10px 12px; font: inherit; font-weight: 700;
+  cursor: pointer; border-radius: var(--r-md); background: var(--bg-elev); color: var(--txt);
+  border: 2px solid var(--linea-fuerte); min-height: 46px;
+  transition: border-color var(--t-rapida), background var(--t-rapida);
+}
+.unir-ficha b {
+  flex: none; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  font-size: .75rem; color: #fff; background: var(--cu, var(--marca));
+}
+.unir-ficha:hover { border-color: var(--marca); }
+.unir-ficha.sel { border-color: var(--marca); background: var(--marca-suave); box-shadow: 0 0 0 3px color-mix(in srgb, var(--marca) 35%, transparent); }
+.unir-ficha.unida { border-color: var(--cu); background: color-mix(in srgb, var(--cu) 12%, var(--bg-elev)); }
+.unir-ficha.u0 { --cu: #2f7fe0; } .unir-ficha.u1 { --cu: #e0489a; } .unir-ficha.u2 { --cu: #12a3ac; } .unir-ficha.u3 { --cu: #ef8b2c; }
+.unir-ficha.u4 { --cu: #8b5cf6; } .unir-ficha.u5 { --cu: #7aa715; } .unir-ficha.u6 { --cu: #d99311; } .unir-ficha.u7 { --cu: #5b5bd6; }
+.unir-ficha.correcta { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--bg-elev)); }
+.unir-ficha.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 14%, var(--bg-elev)); }
+
+/* ---- Completar huecos ---- */
+.cmp { padding: 14px 16px; margin-bottom: 14px; border-radius: var(--r-md); background: var(--bg-elev); border: 1px solid var(--linea); line-height: 2.5; font-size: 1.05rem; }
+.cmp-txt { white-space: pre-wrap; }
+.cmp-in, .cmp-sel {
+  font: inherit; font-weight: 700; padding: 3px 8px; margin: 0 2px; border-radius: var(--r-sm); color: var(--txt);
+  border: 2px solid var(--linea-fuerte); background: var(--bg); max-width: 100%;
+}
+.cmp-in:focus, .cmp-sel:focus { outline: none; border-color: var(--marca); }
+.cmp-in.correcta, .cmp-sel.correcta { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--bg-elev)); }
+.cmp-in.incorrecta, .cmp-sel.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 14%, var(--bg-elev)); }
+
+@media (max-width: 560px) {
+  .unir { gap: 8px; }
+  .unir-ficha { padding: 8px; font-size: .9rem; }
+  .cls-cajas { grid-template-columns: 1fr 1fr; }
+  .ent-visual.es-reloj { width: 128px; height: 128px; }
+}
+
+/* ---- Conjugación en el vocabulario ---- */
+.badge-clase { font-size: .68rem; margin-left: 6px; }
+.clase-regular { background: var(--fart-das); color: var(--art-das); }
+.clase-irregular { background: var(--fart-der); color: var(--art-der); }
+.clase-separable { background: var(--fart-pl); color: var(--art-pl); }
+.clase-modal { background: var(--fart-die); color: var(--art-die); }
+details.conj { margin: 8px 0; }
+details.conj > summary { cursor: pointer; font-weight: 600; font-size: .85rem; color: var(--c-verde); padding: 4px 0; }
+.conj-tabla th { width: 28%; font-weight: 600; }
+.conj-tabla td { font-weight: 600; }
+.conj-tabla td.conj-irr { color: var(--art-der); font-weight: 800; }
+.conj-tabla .conj-es { color: var(--txt-tenue); font-weight: 400; font-size: .8rem; }
+.conj-aviso { font-size: .78rem; color: var(--txt-tenue); margin: 4px 0 0; }

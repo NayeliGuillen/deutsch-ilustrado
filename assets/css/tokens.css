@@ -43,6 +43,12 @@
   --f-indigo:  #eeeeff;
   --f-lima:    #f4f8e3;
 
+  /* Artículos: der rojo · die azul · das verde · plural morado */
+  --art-der: #d62f3f;  --fart-der: #fde9eb;
+  --art-die: #1f6fd6;  --fart-die: #e6f0ff;
+  --art-das: #138a52;  --fart-das: #e3f6ec;
+  --art-pl:  #7a3fe0;  --fart-pl:  #f0e9ff;
+
   /* Semánticos */
   --ok:        #22a06b;
   --error:     #e2564a;
@@ -106,6 +112,11 @@
   --f-rojo:    #2c1a19;
   --f-indigo:  #1c1c33;
   --f-lima:    #232a13;
+
+  --art-der: #ff7b86;  --fart-der: #35181c;
+  --art-die: #6fb0ff;  --fart-die: #14233a;
+  --art-das: #4fd08f;  --fart-das: #12301f;
+  --art-pl:  #b79cff;  --fart-pl:  #251c3d;
 
   --e1: 0 1px 2px rgba(0, 0, 0, .4);
   --e2: 0 4px 14px rgba(0, 0, 0, .45);

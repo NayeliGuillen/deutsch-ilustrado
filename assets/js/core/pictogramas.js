@@ -266,6 +266,11 @@ DE.pic = (function () {
     return '';
   }
 
+  /** Permite que otros archivos añadan dibujos: DE.pic.registrar({ casa: '<path…/>' }). */
+  pic.registrar = function (mapa) {
+    Object.keys(mapa).forEach(function (k) { P[k] = mapa[k]; });
+  };
+
   pic.catalogo = function () {
     return Object.keys(P).concat(Object.keys(BANDERAS).map(function (c) { return 'flag:' + c; }));
   };

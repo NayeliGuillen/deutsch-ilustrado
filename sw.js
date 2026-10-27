@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v7';
+const VERSION = 'deutsch-ilustrado-v9';
 
 const RECURSOS = [
   './',
@@ -26,11 +26,17 @@ const RECURSOS = [
   'assets/js/core/app.js',
   'assets/js/core/iconos.js',
   'assets/js/core/pictogramas.js',
+  'assets/js/core/pictogramas-extra.js',
+  'assets/js/core/pictogramas-libro.js',
   'assets/js/core/mapa.js',
   'assets/js/core/store.js',
   'assets/js/core/voz.js',
   'assets/js/core/dom.js',
   'assets/js/core/fotos.js',
+  'assets/js/core/articulos.js',
+  'assets/js/core/numeros-de.js',
+  'assets/js/core/reloj.js',
+  'assets/js/core/generadores.js',
   'assets/js/core/router.js',
 
   'assets/js/data/pronunciacion.js',
@@ -53,7 +59,26 @@ const RECURSOS = [
   'assets/js/data/vocabulario-direcciones.js',
   'assets/js/data/entrenamiento-direcciones.js',
   'assets/js/data/entrenamiento-vocabulario.js',
+  'assets/js/data/libro-kap3-vocabulario.js',
+  'assets/js/data/libro-kap3-libro.js',
+  'assets/js/data/entrenamiento-kap3.js',
+  'assets/js/data/libro-kap4-vocabulario.js',
+  'assets/js/data/libro-kap4-libro.js',
+  'assets/js/data/entrenamiento-kap4.js',
+  'assets/js/data/libro-kap5-vocabulario.js',
+  'assets/js/data/libro-kap5-libro.js',
+  'assets/js/data/entrenamiento-kap5.js',
   'assets/js/data/quiz.js',
+  'assets/js/data/vocabulario-tiempo.js',
+  'assets/js/data/verbos-a1.js',
+  'assets/js/data/conjugacion-teoria.js',
+  'assets/js/data/entrenamiento-conjugacion.js',
+  'assets/js/data/examen-guia.js',
+  'assets/js/data/examen-entrenamientos.js',
+  'assets/js/data/entrenamiento-oraciones.js',
+  'assets/js/data/conversaciones.js',
+  'assets/js/data/slang.js',
+  'assets/js/data/entrenamiento-slang.js',
 
   'assets/js/views/panel-voz.js',
   'assets/js/views/sincronizar.js',

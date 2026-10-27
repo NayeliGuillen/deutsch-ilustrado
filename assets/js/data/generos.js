@@ -132,7 +132,7 @@ DE.registrarLeccion({
           { tipo: 'lista', estilo: 'check', items: [
             'El género no siempre se deduce: hay que memorizarlo con cada palabra.',
             'El artículo y los adjetivos deben concordar con el género y el caso.',
-            'Truco de color: apunta der en azul, die en rojo y das en verde. El cerebro lo recuerda mejor.',
+            'Truco de color: apunta der en rojo, die en azul, das en verde y los plurales en morado. El cerebro lo recuerda mejor.',
             'En duda, consulta el diccionario: siempre indica el artículo.'
           ]}
         ]

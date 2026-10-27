@@ -158,7 +158,7 @@ DE.registrarLeccion({
         n: 10, color: 'verde', icono: 'diana', titulo: 'Tu método de memoria (5 minutos al día)',
         bloques: [
           { tipo: 'lista', estilo: 'corazon', items: [
-            'Color: der = azul, die = rojo, das = verde. Imagina el objeto de ese color. Son los mismos colores de las etiquetas del vocabulario.',
+            'Color: der = rojo, die = azul, das = verde, plural (die) = morado. Imagina el objeto de ese color. Son los mismos colores de las etiquetas del vocabulario.',
             'Frase corta: una oración mínima con la palabra ("Das ist der Bahnhof") vale más que la lista.',
             'Voz alta: di el artículo y la palabra antes de mirar la respuesta.',
             'Repetición espaciada: repasa hoy, mañana, a los tres días y a la semana.',

@@ -105,7 +105,7 @@ DE.registrarLeccion({
               fon: 'dii AU-to-baan ist seea lanc',
               fonFacil: 'di AU-to-ban ist SE-a LANG (sehr: la r final = "a"; ng nasal)' } },
 
-          { de: 'die Nudeln', es: 'los fideos, la pasta', gen: 'die',
+          { de: 'die Nudeln', es: 'los fideos, la pasta', gen: 'die', soloPlural: true,
             fon: 'NUU-deln',
             fonFacil: 'NU-deln (u larga; -eln se dice rápido)',
             nota: 'Casi siempre en plural: die Nudeln. Un solo fideo es die Nudel.',

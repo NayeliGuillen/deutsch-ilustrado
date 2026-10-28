@@ -562,5 +562,8 @@ DE.gen = (function () {
     return fn ? fn(auto.n || 10, auto) : null;
   }
 
-  return { generar: generar, tipos: Object.keys(TIPOS), lexico: lexico, nombres: nombres, sinArt: sinArt, verbos: verbos, PRON: PRON };
+  /** Permite a otros archivos añadir tipos de generador (generadores-vocab.js). */
+  function registrar(nombre, fn) { TIPOS[nombre] = fn; }
+
+  return { generar: generar, registrar: registrar, tipos: function () { return Object.keys(TIPOS); }, lexico: lexico, nombres: nombres, sinArt: sinArt, verbos: verbos, PRON: PRON };
 })();

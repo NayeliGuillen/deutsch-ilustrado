@@ -28,7 +28,7 @@
     icono: 'jugar',
     grupo: 'Libro · Kapitel 3',
     color: 'turquesa',
-    resumen: 'Siete niveles: lugares, der/das/die, ein/kein, caminos con plano, eventos, estaciones y vocales.',
+    resumen: 'Trece niveles que se abren de uno en uno: lugares, der/das/die, ein/kein, caminos con plano, eventos, estaciones, vocales y práctica ilimitada con todo el vocabulario.',
     vista: 'entrenador',
 
     datos: {
@@ -40,6 +40,7 @@
         {
           id: 'n1', dificultad: 'Fácil', titulo: 'Lugares y edificios',
           descripcion: 'Significado y artículo de las palabras de las págs. 30–31.',
+          auto: { tipo: 'mixto', n: 8, mezcla: [{ tipo: 'v-traducir', n: 8, fuente: ['k3-vocabulario'], categorias: ['lugares', 'transporte'] }] },
           ejercicios: [
             op('¿Qué significa "der Bahnhof"?', 'la estación de tren', ['el aeropuerto', 'el puerto', 'el ayuntamiento'], 'Bahn = tren, Hof = edificio.', { visual: 'tren', foto: 'der Bahnhof', audio: 'der Bahnhof' }),
             op('¿Qué significa "der Hafen"?', 'el puerto', ['la estación', 'el puente', 'el río'], 'der Hafen, die Häfen.', { visual: 'barco', audio: 'der Hafen' }),
@@ -67,6 +68,7 @@
         {
           id: 'n2', dificultad: 'Básico', titulo: 'der, das o die (colores)',
           descripcion: 'Arrastra cada palabra a su caja de color.',
+          auto: { tipo: 'mixto', n: 8, mezcla: [{ tipo: 'v-articulo', n: 6, fuente: ['k3-vocabulario'], categorias: ['lugares', 'transporte', 'eventos'] }, { tipo: 'v-clasificar', n: 2, fuente: ['k3-vocabulario'] }] },
           ejercicios: [
             { t: 'clasificar', p: 'Arrastra cada lugar a su artículo: der (rojo) · die (azul) · das (verde).',
               cajas: [{ etiqueta: 'der', color: 'der' }, { etiqueta: 'die', color: 'die' }, { etiqueta: 'das', color: 'das' }],
@@ -160,6 +162,7 @@
         {
           id: 'n5', dificultad: 'Medio', titulo: 'Eventos y estaciones',
           descripcion: 'Palabras internacionales, meses y estaciones (págs. 34–35).',
+          auto: { tipo: 'mixto', n: 10, mezcla: [{ tipo: 'v-completar', n: 6, fuente: ['k3-vocabulario'], categorias: ['eventos', 'jahreszeiten'] }, { tipo: 'v-traducir', n: 4, fuente: ['k3-vocabulario'], categorias: ['eventos', 'jahreszeiten'] }] },
           ejercicios: [
             { t: 'unir', p: 'Une el inglés con el alemán (p. 34).',
               pares: [['the theater', 'das Theater'], ['the choir', 'der Chor'], ['the concert', 'das Konzert'], ['the film', 'der Film'], ['the audience', 'das Publikum'], ['the orchestra', 'das Orchester']],
@@ -190,6 +193,7 @@
         {
           id: 'n6', dificultad: 'Difícil', titulo: 'Múnich y frases completas',
           descripcion: 'Texto de la p. 36, imperativo y frases del taxi.',
+          auto: { tipo: 'mixto', n: 8, mezcla: [{ tipo: 'v-ordenar', n: 4, fuente: ['k3-vocabulario'], categorias: ['muenchen', 'hamburg', 'camino'] }, { tipo: 'v-frase-es', n: 4, fuente: ['k3-vocabulario'] }] },
           ejercicios: [
             op('"Der Englische Garten": ¿cuántas hectáreas tiene según el texto?', '375', ['25', '137', '1792'], 'Der Park ist sehr groß: 375 Hektar (confírmalo con la escena 6).'),
             op('¿Qué cifra encaja con "Bauzeit"?', '1969–1972', ['1792', '1901', '3,5'], 'Olympiastadion: Bauzeit 1969–1972.'),
@@ -240,7 +244,7 @@
           ]
         }
 
-      ]
+      ].concat(DE.nivelesVocab({ fuente: ['k3-vocabulario'], desde: 8, nombre: 'del capítulo 3', maestro: 'capítulo 3' }))
     }
   });
 })();

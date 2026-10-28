@@ -293,6 +293,10 @@ Tipos de ejercicio: `opcion`, `escribir`, `ordenar` (también con `piezas` para 
 
 En los planos (`core/mapa.js`) la respuesta no se escribe a mano: se **calcula** simulando los pasos (`g`, `l`, `r`) sobre una cuadrícula de 4 × 4 cruces. Un ejercicio de mapa solo necesita `mapa`, `inicio:[c,r]`, `dir`, `pasos` y `lado`.
 
+**Niveles que se desbloquean.** Un nivel se abre al dominar el anterior (90 % o más a la primera). El progreso que ya tenías sigue abierto, y el botón «Abrir todos los niveles» desactiva el bloqueo.
+
+**Práctica ilimitada.** [`core/generadores-vocab.js`](assets/js/core/generadores-vocab.js) fabrica ejercicios nuevos en cada intento desde el vocabulario (`v-traducir`, `v-articulo`, `v-plural`, `v-completar`, `v-ordenar`, `v-escuchar`, `v-unir`, `v-frase-es`, `v-clasificar`). Se limitan a un capítulo con `fuente: ['k3-vocabulario']` y a categorías con `categorias: [...]`. `DE.nivelesVocab({ fuente, desde })` añade de golpe seis niveles de práctica a un entrenador. Un nivel también admite `banco` (ejercicios extra) y `partida` (cuántos se sortean en cada intento).
+
 Para comprobar todo el banco a la vez: `DE.entrenador.validar(ejercicio)` devuelve `null` si el ejercicio es correcto.
 
 ### Colores de los artículos

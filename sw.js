@@ -10,7 +10,7 @@
    los navegadores seguirían sirviendo la versión antigua.
    ============================================================ */
 
-const VERSION = 'deutsch-ilustrado-v9';
+const VERSION = 'deutsch-ilustrado-v10';
 
 const RECURSOS = [
   './',
@@ -37,6 +37,7 @@ const RECURSOS = [
   'assets/js/core/numeros-de.js',
   'assets/js/core/reloj.js',
   'assets/js/core/generadores.js',
+  'assets/js/core/generadores-vocab.js',
   'assets/js/core/router.js',
 
   'assets/js/data/pronunciacion.js',

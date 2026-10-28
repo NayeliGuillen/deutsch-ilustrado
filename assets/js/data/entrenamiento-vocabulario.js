@@ -12,7 +12,7 @@ DE.registrarLeccion({
   icono: 'jugar',
   grupo: 'Domina el tema',
   color: 'naranja',
-  resumen: 'Cinco niveles aleatorios con todo tu vocabulario: significados, artículos y escritura.',
+  resumen: 'Once niveles que se abren de uno en uno, siempre con ejercicios nuevos de todo tu vocabulario: significados, artículos, plurales, frases y dictado.',
   vista: 'entrenador',
 
   datos: {
@@ -45,6 +45,6 @@ DE.registrarLeccion({
         descripcion: 'Escribe tú el artículo (der, die o das) de sustantivos al azar.',
         auto: { tipo: 'articulo-escribir', n: 20 }
       }
-    ]
+    ].concat(DE.nivelesVocab({ fuente: null, desde: 6, nombre: 'de todo tu vocabulario', maestro: 'vocabulario' }))
   }
 });

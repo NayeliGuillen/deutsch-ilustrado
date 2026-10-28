@@ -41,7 +41,7 @@
     icono: 'jugar',
     grupo: 'Domina el tema',
     color: 'azul',
-    resumen: 'Seis niveles de fácil a experto, con explicación de cada fallo. Objetivo: 100 %.',
+    resumen: 'Nueve niveles que se abren de uno en uno, de fácil a experto, con explicación de cada fallo. Objetivo: 100 %.',
     vista: 'entrenador',
 
     datos: {
@@ -157,7 +157,17 @@
           descripcion: '20 sustantivos al azar, y esta vez tecleas tú el artículo.',
           auto: { tipo: 'articulo-escribir', n: 20 }
         }
-      ]
+      ].concat([
+          { id: 'n7', dificultad: 'Avanzado', titulo: 'Arrastra a los colores',
+            descripcion: 'Clasifica palabras en cajas: der rojo, die azul, das verde, plural morado.',
+            auto: { tipo: 'clasificar-articulos', n: 6 } },
+          { id: 'n8', dificultad: 'Avanzado', titulo: 'Plurales',
+            descripcion: 'Escribe o elige el plural de sustantivos al azar. Recuerda: en plural siempre die.',
+            auto: { tipo: 'v-plural', n: 14 } },
+          { id: 'n9', dificultad: 'Maestro', titulo: 'Maestro del artículo',
+            descripcion: 'Elegir, escribir, arrastrar y plurales mezclados, sin ayudas.',
+            auto: { tipo: 'mixto', n: 28, mezcla: [{ tipo: 'articulo', n: 8 }, { tipo: 'articulo-escribir', n: 8 }, { tipo: 'v-plural', n: 8 }, { tipo: 'clasificar-articulos', n: 4 }] } }
+      ])
     }
   });
 })();

@@ -28,7 +28,7 @@
     icono: 'jugar',
     grupo: 'Hablar y escribir',
     color: 'naranja',
-    resumen: 'Ordena, traduce, corrige y responde: oraciones completas con verbo en 2ª posición, Akkusativ y kein.',
+    resumen: 'Nueve niveles que se abren de uno en uno: ordena, traduce, corrige y responde oraciones con verbo en 2ª posición, Akkusativ y kein.',
     vista: 'entrenador',
 
     datos: {
@@ -144,7 +144,17 @@
               why: 'wie komme ich…? · geradeaus · links · Danke schön (B diría: Bitte schön / Gern geschehen).' }
           ]
         }
-      ]
+      ].concat([
+          { id: 'n7', dificultad: 'Medio', titulo: 'Ordena frases de tu vocabulario',
+            descripcion: 'Frases de los capítulos que ya estudiaste. Siempre nuevas.',
+            auto: { tipo: 'v-ordenar', n: 10 } },
+          { id: 'n8', dificultad: 'Difícil', titulo: 'Completa y entiende',
+            descripcion: 'Huecos en frases reales y elegir la traducción correcta.',
+            auto: { tipo: 'mixto', n: 16, mezcla: [{ tipo: 'v-completar', n: 8 }, { tipo: 'v-frase-es', n: 8 }] } },
+          { id: 'n9', dificultad: 'Experto', titulo: 'Maestro de frases',
+            descripcion: 'Ordenar, completar, escuchar y traducir mezclados.',
+            auto: { tipo: 'mixto', n: 24, mezcla: [{ tipo: 'v-ordenar', n: 8 }, { tipo: 'v-completar', n: 6 }, { tipo: 'v-escuchar', modo: 'frase', n: 6 }, { tipo: 'v-frase-es', n: 4 }] } }
+      ])
     }
   });
 })();

@@ -44,7 +44,7 @@
     icono: 'jugar',
     grupo: 'Domina el tema',
     color: 'turquesa',
-    resumen: 'Seis niveles con planos de ciudad: de links y rechts a rutas de cinco pasos.',
+    resumen: 'Ocho niveles que se abren de uno en uno, con planos de ciudad: de links y rechts a rutas de cinco pasos.',
     vista: 'entrenador',
 
     datos: {
@@ -204,7 +204,14 @@
               why: 'die Post → zur (zu + der).', audio: 'Wie komme ich zur Post?' }
           ]
         }
-      ]
+      ].concat([
+          { id: 'n7', dificultad: 'Experto', titulo: 'Planos sin fin',
+            descripcion: 'Rutas nuevas en cada intento: sigue las instrucciones o escríbelas.',
+            auto: { tipo: 'mapa-azar', n: 8, min: 2, max: 4 } },
+          { id: 'n8', dificultad: 'Maestro', titulo: 'Maestro de rutas',
+            descripcion: 'Rutas largas de cuatro a cinco pasos, sin ayuda.',
+            auto: { tipo: 'mapa-azar', n: 8, min: 4, max: 5 } }
+      ])
     }
   });
 })();

@@ -51,7 +51,7 @@
     icono: 'jugar',
     grupo: 'Domina el tema',
     color: 'verde',
-    resumen: 'Ocho niveles: elegir, negar, plural, ordenar, cazar errores y escribir frases.',
+    resumen: 'Diez niveles que se abren de uno en uno: elegir, negar, plural, ordenar, cazar errores y escribir frases.',
     vista: 'entrenador',
 
     datos: {
@@ -248,7 +248,14 @@
               pista: 'Hier ist … , aber …', audio: 'Hier ist kein Turm, aber hier ist ein Park.' }
           ]
         }
-      ]
+      ].concat([
+          { id: 'n9', dificultad: 'Avanzado', titulo: 'Maratón: ein / kein',
+            descripcion: 'Veinte frases al azar con ein, eine, kein, keine (Nominativ y Akkusativ).',
+            auto: { tipo: 'ein-kein', n: 20, neg: 'mixto' } },
+          { id: 'n10', dificultad: 'Experto', titulo: 'Maestro de ein y kein',
+            descripcion: 'Más frases, más rápido, y también con Akkusativ (einen, keinen).',
+            auto: { tipo: 'mixto', n: 24, mezcla: [{ tipo: 'ein-kein', n: 12, neg: 'mixto' }, { tipo: 'art-akk', n: 12 }] } }
+      ])
     }
   });
 })();

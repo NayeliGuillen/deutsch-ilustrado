@@ -294,6 +294,25 @@
     function mejor(nivel) { return DE.store.dominio(clave(nivel)).mejor; }
     function dominado(nivel) { return mejor(nivel) >= UMBRAL; }
 
+    /* Un nivel se abre al dominar el anterior. Se respeta el progreso ya
+       hecho (si ya lo intentaste, sigue abierto) y existe un modo libre. */
+    function libres() { return !!DE.store.obtener('nivelesLibres'); }
+    function abierto(i) {
+      if (i === 0 || libres()) return true;
+      if (DE.store.dominio(clave(datos.niveles[i])).intentos) return true;
+      return dominado(datos.niveles[i - 1]);
+    }
+    var tamanos = {};
+    function tamano(n) {
+      if (tamanos[n.id] != null) return tamanos[n.id];
+      var base = (n.ejercicios ? n.ejercicios.length : 0) + (n.banco ? n.banco.length : 0);
+      var auto = 0;
+      try { auto = n.auto ? generar(n.auto).length : 0; } catch (e) { auto = n.auto ? (n.auto.n || 15) : 0; }
+      var t = base + auto;
+      tamanos[n.id] = n.partida ? Math.min(n.partida, t) : t;
+      return tamanos[n.id];
+    }
+
     /* ---------------- Pantalla de niveles ------------------ */
     function pantallaNiveles() {
       var hechos = datos.niveles.filter(dominado).length;
@@ -310,43 +329,56 @@
           '<div><strong>' + hechos + ' de ' + total + '</strong> niveles dominados' +
           '<span class="ent-regla"> · Se domina con ' + UMBRAL + ' % o más, a la primera</span></div>' +
           '<div class="quiz-barra"><span style="width:' + pct + '%"></span></div>' +
+          '<p class="ent-regla ent-candado-nota">' + DE.icono('candado') + ' Cada nivel se abre al dominar el anterior.' +
+            ' <button type="button" class="btn btn-ghost btn-sm" data-libres>' +
+            (libres() ? 'Volver a bloquear niveles' : 'Abrir todos los niveles') + '</button></p>' +
         '</div>' +
         '<div class="ent-niveles">' + datos.niveles.map(tarjetaNivel).join('') + '</div>';
 
       raiz.querySelectorAll('[data-nivel]').forEach(function (b) {
         b.addEventListener('click', function () {
           var nivel = datos.niveles.find(function (n) { return n.id === b.getAttribute('data-nivel'); });
-          empezar(nivel);
+          if (abierto(datos.niveles.indexOf(nivel))) empezar(nivel);
         });
+      });
+      var bl = raiz.querySelector('[data-libres]');
+      if (bl) bl.addEventListener('click', function () {
+        DE.store.fijar('nivelesLibres', !libres());
+        pantallaNiveles();
       });
       window.scrollTo(0, 0);
     }
 
     function tarjetaNivel(n, i) {
       var m = mejor(n), intentos = DE.store.dominio(clave(n)).intentos;
-      var estado = m >= 100 ? 'perfecto' : (m >= UMBRAL ? 'dominado' : (intentos ? 'practicando' : 'nuevo'));
-      var etiqueta = { perfecto: 'Perfecto', dominado: 'Dominado', practicando: 'Sigue practicando', nuevo: 'Sin empezar' }[estado];
-      var cuantos = (n.ejercicios ? n.ejercicios.length : 0) + (n.auto ? (n.auto.n || 15) : 0);
+      var cerrado = !abierto(i);
+      var estado = cerrado ? 'bloqueado' : (m >= 100 ? 'perfecto' : (m >= UMBRAL ? 'dominado' : (intentos ? 'practicando' : 'nuevo')));
+      var etiqueta = { bloqueado: 'Bloqueado', perfecto: 'Perfecto', dominado: 'Dominado', practicando: 'Sigue practicando', nuevo: 'Disponible' }[estado];
+      var cuantos = tamano(n);
+      var infinito = n.auto || n.partida;
+      var previo = i > 0 ? datos.niveles[i - 1] : null;
       return '<article class="ent-nivel ' + estado + '">' +
-        '<div class="ent-nivel-num">' + (i + 1) + '</div>' +
+        '<div class="ent-nivel-num">' + (cerrado ? DE.icono('candado') : (i + 1)) + '</div>' +
         '<div class="ent-nivel-cuerpo">' +
           '<p class="ent-nivel-dif">' + d.esc(n.dificultad || '') + '</p>' +
           '<h3>' + d.esc(n.titulo) + '</h3>' +
           '<p class="ent-nivel-desc">' + d.esc(n.descripcion) + '</p>' +
-          '<p class="ent-nivel-meta">' + cuantos + ' ejercicios' + (n.auto ? ' · ' + (n.ejercicios ? 'algunos' : 'todos') + ' distintos cada vez' : '') +
-            (intentos ? ' · mejor: <strong>' + m + ' %</strong>' : '') + '</p>' +
+          '<p class="ent-nivel-meta">' + cuantos + ' ejercicios' + (infinito ? ' · distintos cada vez' : '') +
+            (intentos ? ' · mejor: <strong>' + m + ' %</strong>' : '') +
+            (cerrado && previo ? ' · Domina «' + d.esc(previo.titulo) + '» para abrirlo' : '') + '</p>' +
         '</div>' +
         '<div class="ent-nivel-lado">' +
           '<span class="ent-sello">' + etiqueta + '</span>' +
-          '<button type="button" class="btn btn-sm" data-nivel="' + d.esc(n.id) + '">' +
-            (intentos ? 'Repetir' : 'Empezar') + '</button>' +
+          '<button type="button" class="btn btn-sm" data-nivel="' + d.esc(n.id) + '"' + (cerrado ? ' disabled' : '') + '>' +
+            (cerrado ? 'Bloqueado' : (intentos ? 'Repetir' : 'Empezar')) + '</button>' +
         '</div>' +
       '</article>';
     }
 
     /* ---------------- Una partida de un nivel -------------- */
     function empezar(nivel) {
-      var lista = barajar((nivel.ejercicios || []).concat(nivel.auto ? generar(nivel.auto) : []));
+      var lista = barajar((nivel.ejercicios || []).concat(nivel.banco || []).concat(nivel.auto ? generar(nivel.auto) : []));
+      if (nivel.partida && lista.length > nivel.partida) lista = lista.slice(0, nivel.partida);
       var run = { nivel: nivel, items: lista, i: 0, fallos: [], primeros: 0, repaso: false };
       pregunta(run);
     }
@@ -932,6 +964,7 @@
           '<p><strong>' + run.primeros + ' de ' + total + '</strong> a la primera' +
             (previo > pct ? ' · tu mejor marca sigue siendo ' + previo + ' %' : '') + '</p>' +
           '<p>' + veredicto + '</p>' +
+          (siguiente && previo < UMBRAL && !libres() ? '<p class="ent-desbloqueo">' + DE.icono('llave') + ' Desbloqueaste el nivel «' + d.esc(siguiente.titulo) + '».</p>' : '') +
           '<div class="ent-acciones">' +
             (run.fallos.length ? '<button type="button" class="btn" data-fallos>Repasar mis ' + run.fallos.length + ' fallos</button>' : '') +
             '<button type="button" class="btn btn-ghost" data-repetir>Repetir el nivel</button>' +

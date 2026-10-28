@@ -26,7 +26,7 @@
     icono: 'jugar',
     grupo: 'Libro · Kapitel 4',
     color: 'naranja',
-    resumen: 'Ocho niveles: comida, tiendas, Akkusativ, mögen/möchten, precios, orden de la frase y textos del libro.',
+    resumen: 'Quince niveles que se abren de uno en uno: comida, tiendas, Akkusativ, mögen/möchten, precios, orden de la frase, textos del libro y práctica ilimitada.',
     vista: 'entrenador',
 
     datos: {
@@ -38,6 +38,7 @@
         {
           id: 'n1', dificultad: 'Fácil', titulo: 'Lebensmittel: significado',
           descripcion: 'Las listas del Frühstück, Mittagessen, Kaffee und Kuchen y Abendessen.',
+          auto: { tipo: 'mixto', n: 8, mezcla: [{ tipo: 'v-traducir', n: 8, fuente: ['k4-vocabulario'], categorias: ['fruehstueck', 'mittagessen', 'kaffee', 'abendessen'] }] },
           ejercicios: [
             sig('die Banane', 'el plátano', ['la manzana', 'la naranja', 'la pera'], 'banana'),
             sig('der Orangensaft', 'el jugo de naranja', ['el té', 'la leche', 'el café'], 'vaso'),
@@ -65,6 +66,7 @@
         {
           id: 'n2', dificultad: 'Básico', titulo: 'Colores: der, die, das, plural',
           descripcion: 'Arrastra cada alimento a su caja de color.',
+          auto: { tipo: 'mixto', n: 12, mezcla: [{ tipo: 'v-articulo', n: 6, fuente: ['k4-vocabulario'] }, { tipo: 'v-clasificar', n: 2, fuente: ['k4-vocabulario'] }, { tipo: 'v-plural', n: 4, fuente: ['k4-vocabulario'] }] },
           ejercicios: [
             { t: 'clasificar', p: 'Frühstück: ¿der, die o das?',
               cajas: [{ etiqueta: 'der', color: 'der' }, { etiqueta: 'die', color: 'die' }, { etiqueta: 'das', color: 'das' }],
@@ -109,6 +111,7 @@
         {
           id: 'n3', dificultad: 'Básico', titulo: 'Geschäfte: ¿dónde compro qué?',
           descripcion: 'Bäckerei, Markt, Metzgerei, Supermarkt (p. 44–45).',
+          auto: { tipo: 'mixto', n: 7, mezcla: [{ tipo: 'v-traducir', n: 5, fuente: ['k4-vocabulario'], categorias: ['geschaefte', 'supermarkt', 'berufe'] }, { tipo: 'v-unir', n: 2, fuente: ['k4-vocabulario'], categorias: ['geschaefte', 'supermarkt', 'berufe'] }] },
           ejercicios: [
             { t: 'unir', p: 'Une cada tienda con su significado.',
               pares: [['die Bäckerei', 'la panadería'], ['die Metzgerei', 'la carnicería'], ['der Supermarkt', 'el supermercado'], ['der Markt', 'el mercado']],
@@ -214,6 +217,7 @@
         {
           id: 'n7', dificultad: 'Difícil', titulo: 'Posición 2 y frases largas',
           descripcion: 'El verbo siempre en posición 2 (p. 49 y p. 53).',
+          auto: { tipo: 'mixto', n: 6, mezcla: [{ tipo: 'v-ordenar', n: 6, fuente: ['k4-vocabulario'] }] },
           ejercicios: [
             ord('Ordena: Lina come muesli por la mañana.', 'Lina isst morgens Müsli.', [], 'Sujeto + verbo (pos. 2) + tiempo + objeto.'),
             ord('Ordena (empieza con "Morgens"): Por la mañana come Lina muesli.', 'Morgens isst Lina Müsli.', [], 'Al empezar con "morgens", el sujeto va detrás del verbo.'),
@@ -256,6 +260,7 @@
         {
           id: 'n9', dificultad: 'Medio', titulo: 'Wörter lernen: grupos y parejas',
           descripcion: 'La estrategia de la p. 50 convertida en juego.',
+          auto: { tipo: 'mixto', n: 3, mezcla: [{ tipo: 'v-unir', n: 3, fuente: ['k4-vocabulario'] }] },
           ejercicios: [
             { t: 'clasificar', p: 'Mindmap "Essen und Trinken": ¿a qué rama pertenece cada palabra?',
               cajas: [{ etiqueta: 'Lebensmittel', color: 'verde' }, { etiqueta: 'Getränke', color: 'azul' }, { etiqueta: 'Geschäfte', color: 'naranja' }, { etiqueta: 'Mahlzeiten', color: 'morado' }],
@@ -284,7 +289,7 @@
           ]
         }
 
-      ]
+      ].concat(DE.nivelesVocab({ fuente: ['k4-vocabulario'], desde: 10, nombre: 'del capítulo 4', maestro: 'capítulo 4' }))
     }
   });
 })();

@@ -31,7 +31,7 @@
     icono: 'jugar',
     grupo: 'Verbos',
     color: 'verde',
-    resumen: 'Siete niveles: de las terminaciones regulares a tablas completas y oraciones con separables y modales.',
+    resumen: 'Diez niveles que se abren de uno en uno: de las terminaciones regulares a tablas completas y oraciones con separables y modales.',
     vista: 'entrenador',
 
     datos: {
@@ -129,7 +129,17 @@
           ],
           auto: { tipo: 'conj-escribir', n: 6, filtro: function (p) { return p.clase !== 'modal'; } }
         }
-      ]
+      ].concat([
+          { id: 'n8', dificultad: 'Difícil', titulo: 'Maratón: escribe las formas',
+            descripcion: 'Veinte formas al azar de todos los verbos, sin pistas.',
+            auto: { tipo: 'conj-escribir', n: 20 } },
+          { id: 'n9', dificultad: 'Difícil', titulo: 'Maratón: frases con el verbo',
+            descripcion: 'Elige la forma correcta dentro de frases de verdad.',
+            auto: { tipo: 'mixto', n: 16, mezcla: [{ tipo: 'conj-opcion', n: 8 }, { tipo: 'conj-frase', n: 8 }] } },
+          { id: 'n10', dificultad: 'Experto', titulo: 'Maestro de la conjugación',
+            descripcion: 'Formas, frases y tablas completas mezcladas.',
+            auto: { tipo: 'mixto', n: 22, mezcla: [{ tipo: 'conj-escribir', n: 10 }, { tipo: 'conj-frase', n: 8 }, { tipo: 'conj-tabla', n: 4 }] } }
+      ])
     }
   });
 })();

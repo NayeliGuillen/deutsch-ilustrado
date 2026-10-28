@@ -494,6 +494,12 @@ table.tabla tbody tr:hover { background: var(--bg-sunken); }
 .ent-nivel.practicando { border-left-color: var(--c-naranja); }
 .ent-nivel.dominado { border-left-color: var(--ok); }
 .ent-nivel.perfecto { border-left-color: var(--marca); background: color-mix(in srgb, var(--marca) 8%, var(--bg-elev)); }
+.ent-nivel.bloqueado { opacity: .62; border-left-color: var(--linea-fuerte); }
+.ent-nivel.bloqueado .ent-nivel-num svg { width: 20px; height: 20px; }
+.ent-candado-nota { margin: 10px 0 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ent-candado-nota svg { width: 16px; height: 16px; }
+.ent-desbloqueo { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--ok); font-weight: 700; }
+.ent-desbloqueo svg { width: 18px; height: 18px; }
 .ent-nivel-num {
   width: 44px; height: 44px; border-radius: var(--r-full); display: grid; place-items: center;
   background: var(--bg-sunken); font-family: var(--f-titulo); font-weight: 800; font-size: 1.1rem;

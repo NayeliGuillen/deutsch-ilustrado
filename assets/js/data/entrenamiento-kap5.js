@@ -25,7 +25,7 @@
     icono: 'jugar',
     grupo: 'Libro · Kapitel 5',
     color: 'morado',
-    resumen: 'Seis niveles: rutina diaria, verbos con cambio de vocal, in + Akkusativ, la hora y Wann? – Um …',
+    resumen: 'Doce niveles que se abren de uno en uno: rutina diaria, verbos con cambio de vocal, in + Akkusativ, la hora, Wann? – Um … y práctica ilimitada.',
     vista: 'entrenador',
 
     datos: {
@@ -37,6 +37,7 @@
         {
           id: 'n1', dificultad: 'Fácil', titulo: 'El día de Kaan',
           descripcion: 'Las siete frases del ejercicio 1a y los verbos clave.',
+          auto: { tipo: 'mixto', n: 6, mezcla: [{ tipo: 'v-traducir', n: 6, fuente: ['k5-vocabulario'], categorias: ['tag'] }] },
           ejercicios: [
             sig('duschen', 'ducharse', ['desayunar', 'estudiar', 'dormir'], 'ducha'),
             sig('frühstücken', 'desayunar', ['cenar', 'cocinar', 'ducharse'], 'pan'),
@@ -64,6 +65,7 @@
         {
           id: 'n2', dificultad: 'Básico', titulo: 'El domingo de Kaan',
           descripcion: 'Las actividades del ejercicio 2a.',
+          auto: { tipo: 'mixto', n: 7, mezcla: [{ tipo: 'v-frase-es', n: 4, fuente: ['k5-vocabulario'] }, { tipo: 'v-traducir', n: 3, fuente: ['k5-vocabulario'], categorias: ['sonntag', 'orte'] }] },
           ejercicios: [
             { t: 'unir', p: 'Une las actividades del domingo con su significado.',
               pares: [['Zeitung lesen', 'leer el periódico'], ['lange schlafen', 'dormir hasta tarde'], ['Fußball spielen', 'jugar al fútbol'], ['Freunde treffen', 'quedar con amigos'],
@@ -88,6 +90,7 @@
         {
           id: 'n3', dificultad: 'Medio', titulo: 'Cambio de vocal: fahren, lesen, treffen, schlafen',
           descripcion: 'du y er/sie/es cambian la vocal.',
+          auto: { tipo: 'mixto', n: 6, mezcla: [{ tipo: 'v-completar', n: 3, fuente: ['k5-vocabulario'] }, { tipo: 'v-articulo', n: 3, fuente: ['k5-vocabulario'] }] },
           ejercicios: [
             op('fahren: du ___', 'fährst', ['fahrst', 'fahrt', 'fahren'], 'a → ä en du y er.', { fijo: true }),
             op('fahren: er ___', 'fährt', ['fahrt', 'fährst', 'fahre'], 'er fährt.', { fijo: true }),
@@ -114,6 +117,7 @@
         {
           id: 'n4', dificultad: 'Medio', titulo: 'Adónde voy: in die, in den, ins',
           descripcion: 'Dirección (wohin?) con in + Akkusativ.',
+          auto: { tipo: 'mixto', n: 4, mezcla: [{ tipo: 'v-ordenar', n: 4, fuente: ['k5-vocabulario'] }] },
           ejercicios: [
             op('"Kaan geht ___ Mensa."', 'in die', ['in den', 'ins', 'in der'], 'die Mensa → in die.', { fijo: true }),
             op('"Er fährt ___ Uni."', 'in die', ['in den', 'ins', 'in der'], 'die Uni → in die.', { fijo: true }),
@@ -180,7 +184,7 @@
           ]
         }
 
-      ]
+      ].concat(DE.nivelesVocab({ fuente: ['k5-vocabulario'], desde: 7, escala: 0.6, nombre: 'del capítulo 5', maestro: 'capítulo 5' }))
     }
   });
 })();

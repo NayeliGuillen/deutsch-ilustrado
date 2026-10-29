@@ -53,7 +53,7 @@ DE.dom = (function () {
 
     /** Tabla compacta para el interior de una tarjeta de infografía. */
     tablaInfo: function (encabezados, filas) {
-      var html = '<table class="info-tabla"><thead><tr>';
+      var html = '<table class="info-tabla' + (encabezados.length >= 5 ? ' t-ancha' : '') + '"><thead><tr>';
       encabezados.forEach(function (h) { html += '<th>' + esc(h) + '</th>'; });
       html += '</tr></thead><tbody>';
       filas.forEach(function (fila) {

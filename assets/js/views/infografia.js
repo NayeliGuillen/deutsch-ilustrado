@@ -75,10 +75,14 @@
   function recuadro(b) {
     var clase = b.clase || '!';
     var marca = clase === 'frases' ? DE.icono('mensaje') : d.esc(MARCAS[clase] || '!');
-    return '<div class="info-rec rec-' + d.esc(clase === '!' ? 'imp' : clase) + '">' +
+    /* Con título: marca y título en una fila y el contenido debajo, a todo el ancho
+       (así las tablas anchas caben). Sin título: la marca va al lado, como antes. */
+    var titulado = !!(b.titulo || b.etiqueta);
+    var tit = titulado ? '<p class="rec-titulo">' + etiqueta(b.etiqueta) + (b.titulo ? d.esc(b.titulo) : '') + '</p>' : '';
+    return '<div class="info-rec rec-' + d.esc(clase === '!' ? 'imp' : clase) + (titulado ? ' rec-titulado' : '') + '">' +
       '<span class="rec-marca" data-sin-color aria-hidden="true">' + marca + '</span>' +
+      (titulado ? tit : '') +
       '<div class="rec-cuerpo">' +
-        ((b.titulo || b.etiqueta) ? '<p class="rec-titulo">' + etiqueta(b.etiqueta) + (b.titulo ? d.esc(b.titulo) : '') + '</p>' : '') +
         (b.bloques || []).map(interior).join('') +
       '</div></div>';
   }

@@ -80,7 +80,7 @@
    una lámina real (efecto "masonry" con soporte universal).
    ----------------------------------------------------------- */
 .info-rejilla {
-  columns: 3 290px;
+  columns: 3 360px;   /* tarjetas más anchas para que quepan las tablas del libro */
   column-gap: 18px;
 }
 
@@ -182,7 +182,8 @@
   letter-spacing: .05em; border-bottom: 2px solid color-mix(in srgb, var(--c) 45%, transparent);
 }
 .info-tabla tbody tr + tr td { border-top: 1px solid color-mix(in srgb, var(--c) 22%, transparent); }
-.info-tabla td:first-child { font-weight: 700; white-space: nowrap; }
+.info-tabla td:first-child { font-weight: 700; }
+.info-tabla td, .info-tabla th { overflow-wrap: break-word; vertical-align: top; }
 
 /* Nota tipo "¡Atención!" */
 .info-aviso {
@@ -218,9 +219,17 @@
 
 /* Tablas anchas en el móvil: el texto se parte y, si aun así no cabe, se desliza. */
 .info-caja { overflow-x: auto; }
+.info-tabla td .nowrap { white-space: normal; }
+/* Pista de que la tabla se desliza: el borde derecho se difumina (cae sobre el relleno si la tabla cabe). */
+.info-caja:has(.info-tabla), .rec-cuerpo:has(.info-tabla) {
+  padding-right: 12px;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent);
+}
 @media (max-width: 560px) {
-  .info-tabla td .nowrap, .info-tabla td:first-child { white-space: normal; }
-  .info-tabla th, .info-tabla td { padding: 5px 5px; }
+  .info-tabla { font-size: .72rem; }
+  .info-tabla th { font-size: .56rem; letter-spacing: 0; }
+  .info-tabla th, .info-tabla td { padding: 4px 3px; }
 }
 
 /* ============================================================
@@ -252,10 +261,21 @@
 }
 .rec-marca .ico { width: 17px; height: 17px; vertical-align: 0; }
 .rec-cuerpo { min-width: 0; flex: 1; font-size: .88rem; }
+.rec-titulado { display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 10px; row-gap: 8px; align-items: center; }
+.rec-titulado > .rec-cuerpo { grid-column: 1 / -1; }
+.rec-titulado > .rec-titulo { margin: 0; }
 .rec-titulo { margin: 0 0 6px; font-weight: 800; color: var(--rc); font-size: .9rem; }
 .rec-cuerpo p { margin: 0 0 6px; }
 .rec-cuerpo .info-ejemplo { margin: 4px 0; }
 .rec-cuerpo .info-tabla { margin: 4px 0 6px; }
+.rec-cuerpo { overflow-x: auto; }
+/* Tablas dentro de un recuadro (columna estrecha): más compactas, y si aun así no caben, se deslizan. */
+.rec-cuerpo .info-tabla { font-size: .76rem; }
+.rec-cuerpo .info-tabla th { font-size: .6rem; letter-spacing: 0; }
+.rec-cuerpo .info-tabla th, .rec-cuerpo .info-tabla td { padding: 4px 3px; }
+.info-tabla.t-ancha { font-size: .7rem; }
+.info-tabla.t-ancha th { font-size: .54rem; }
+.info-tabla.t-ancha th, .info-tabla.t-ancha td { padding: 3px 2px; }
 .rec-cuerpo .info-lista { margin: 4px 0 6px; }
 
 /* Lecturas y diálogos */
